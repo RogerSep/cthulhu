@@ -1,0 +1,9 @@
+.pollo-view {
+	display: flex;
+}
+
+.img-container {
+  height: 100vh;
+  width: 75vw;
+  text-align: center;
+}
