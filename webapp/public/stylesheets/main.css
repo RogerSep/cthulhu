@@ -1,9 +1,30 @@
 .pollo-view {
-	display: flex;
+  display: flex;
 }
 
 .img-container {
   height: 100vh;
   width: 75vw;
   text-align: center;
+}
+
+.pollito {
+  position: absolute;
+  background-color: whitesmoke;
+  opacity: 0.5;
+}
+
+.active {
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+
+.inactive {
+  opacity: 0.5;
+  transition: all 0.5s ease;
+}
+
+.edit {
+  position: absolute;
+  bottom: 0;
 }
