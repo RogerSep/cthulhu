@@ -1,6 +1,5 @@
 package org.cthulhu.oauth2.user
 
-import java.util.UUID
 import javax.inject.Inject
 
 import com.mohiva.play.silhouette.api.LoginInfo
@@ -52,7 +51,6 @@ class UserServiceImpl @Inject() (userDAO: UserDAO) extends UserService {
         ))
       case None => // Insert a new user
         userDAO.save(User(
-          userID = UUID.randomUUID(),
           loginInfo = profile.loginInfo,
           firstName = profile.firstName,
           lastName = profile.lastName,

@@ -3,11 +3,13 @@
 # ~~~~
 
 # Home page
-GET        /                              @controllers.Application.index
+GET     /                             @controllers.Application.index
 
-GET         /signIn                       @controllers.SocialAuthController.signIn
+GET     /signIn                       @controllers.SocialAuthController.signIn
 
-GET        /authenticate/:provider       @controllers.SocialAuthController.authenticate(provider)
+GET     /authenticate/:provider       @controllers.SocialAuthController.authenticate(provider)
+
+GET     /debug                        @controllers.Application.debug
 
 
 # Map static resources from the /public folder to the /assets URL path

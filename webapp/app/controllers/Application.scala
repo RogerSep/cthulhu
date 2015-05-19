@@ -8,6 +8,8 @@ import com.mohiva.play.silhouette.impl.providers.SocialProviderRegistry
 
 import org.cthulhu.oauth2.user.User
 
+import play.api.mvc.Action
+
 import scala.concurrent.Future
 
 class Application @Inject() (
@@ -17,6 +19,10 @@ class Application @Inject() (
 
   def index = SecuredAction { request =>
     Ok(request.identity.toString())
+  }
+
+  def debug = Action {
+    Ok(org.cthulhu.oauth2.OAuth2InfoDAO.data.toString)
   }
 
 }
