@@ -61,12 +61,10 @@ object UserDAOImpl {
       get id loginInfo.providerKey from ("users/" + loginInfo.providerID)
     } map { response =>
       if (response.isExists) {
-        println(response.getSourceAsString)
         play.api.libs.json.Json
           .parse(response.getSourceAsString)
           .asOpt(User.userFmt)
       } else {
-        println("not found")
         None
       }
     }
