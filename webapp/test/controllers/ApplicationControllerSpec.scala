@@ -39,16 +39,6 @@ class ApplicationControllerSpec extends PlaySpecification with Mockito {
         contentAsString(unauthorizedResult) must contain("Silhouette - Sign In")
       }
     }
-
-    "return 200 if user is authorized" in new Context {
-      new WithApplication(application) {
-        val Some(result) = route(FakeRequest(routes.ApplicationController.index())
-          .withAuthenticator[SessionAuthenticator](identity.loginInfo)
-        )
-
-        status(result) must beEqualTo(OK)
-      }
-    }
   }
 
   /**
@@ -69,7 +59,6 @@ class ApplicationControllerSpec extends PlaySpecification with Mockito {
      * An identity.
      */
     val identity = User(
-      userID = UUID.randomUUID(),
       loginInfo = LoginInfo("facebook", "user@facebook.com"),
       firstName = None,
       lastName = None,
