@@ -16,7 +16,6 @@ import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
  * @param avatarURL Maybe the avatar URL of the authenticated provider.
  */
 case class User(
-  userID: UUID,
   loginInfo: LoginInfo,
   firstName: Option[String],
   lastName: Option[String],

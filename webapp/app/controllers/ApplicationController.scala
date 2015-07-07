@@ -5,7 +5,6 @@ import javax.inject.Inject
 import com.mohiva.play.silhouette.api.{ Environment, LogoutEvent, Silhouette }
 import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
 import com.mohiva.play.silhouette.impl.providers.SocialProviderRegistry
-import forms._
 import models.User
 import play.api.i18n.MessagesApi
 
@@ -41,19 +40,7 @@ class ApplicationController @Inject() (
   def signIn = UserAwareAction.async { implicit request =>
     request.identity match {
       case Some(user) => Future.successful(Redirect(routes.ApplicationController.index()))
-      case None => Future.successful(Ok(views.html.signIn(SignInForm.form, socialProviderRegistry)))
-    }
-  }
-
-  /**
-   * Handles the Sign Up action.
-   *
-   * @return The result to display.
-   */
-  def signUp = UserAwareAction.async { implicit request =>
-    request.identity match {
-      case Some(user) => Future.successful(Redirect(routes.ApplicationController.index()))
-      case None => Future.successful(Ok(views.html.signUp(SignUpForm.form)))
+      case None => Future.successful(Ok(views.html.signIn(socialProviderRegistry)))
     }
   }
 
