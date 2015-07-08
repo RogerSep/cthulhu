@@ -6,7 +6,9 @@ import com.mohiva.play.silhouette.api.{ Environment, LogoutEvent, Silhouette }
 import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
 import com.mohiva.play.silhouette.impl.providers.SocialProviderRegistry
 import models.User
+import models.daos.OAuth2InfoDAO
 import play.api.i18n.MessagesApi
+import play.api.mvc.Action
 
 import scala.concurrent.Future
 
@@ -54,5 +56,9 @@ class ApplicationController @Inject() (
     env.eventBus.publish(LogoutEvent(request.identity, request, request2Messages))
 
     env.authenticatorService.discard(request.authenticator, result)
+  }
+
+  def debug = Action { request =>
+    Ok(OAuth2InfoDAO.data.toString)
   }
 }

@@ -1,6 +1,7 @@
 package models
 
 import java.util.UUID
+import play.api.libs.json._
 
 import com.mohiva.play.silhouette.api.{ Identity, LoginInfo }
 
@@ -22,3 +23,9 @@ case class User(
   fullName: Option[String],
   email: Option[String],
   avatarURL: Option[String]) extends Identity
+
+object User {
+
+  implicit val format = Json.format[User]
+
+}
