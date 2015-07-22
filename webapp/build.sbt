@@ -4,7 +4,7 @@ name := "play-silhouette-seed"
 
 version := "3.0.0-RC1"
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.7"
 
 resolvers := ("Atlassian Releases" at "https://maven.atlassian.com/public/") +: resolvers.value
 

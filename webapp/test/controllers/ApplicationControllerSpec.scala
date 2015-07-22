@@ -4,7 +4,7 @@ import java.util.UUID
 
 import com.google.inject.AbstractModule
 import com.mohiva.play.silhouette.api.{ Environment, LoginInfo }
-import com.mohiva.play.silhouette.impl.authenticators.SessionAuthenticator
+import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
 import com.mohiva.play.silhouette.test._
 import models.User
 import net.codingwell.scalaguice.ScalaModule
@@ -24,7 +24,7 @@ class ApplicationControllerSpec extends PlaySpecification with Mockito {
     "redirect to login page if user is unauthorized" in new Context {
       new WithApplication(application) {
         val Some(redirectResult) = route(FakeRequest(routes.ApplicationController.index())
-          .withAuthenticator[SessionAuthenticator](LoginInfo("invalid", "invalid"))
+          .withAuthenticator[CookieAuthenticator](LoginInfo("invalid", "invalid"))
         )
 
         status(redirectResult) must be equalTo SEE_OTHER
@@ -51,7 +51,7 @@ class ApplicationControllerSpec extends PlaySpecification with Mockito {
      */
     class FakeModule extends AbstractModule with ScalaModule {
       def configure() = {
-        bind[Environment[User, SessionAuthenticator]].toInstance(env)
+        bind[Environment[User, CookieAuthenticator]].toInstance(env)
       }
     }
 
@@ -70,7 +70,7 @@ class ApplicationControllerSpec extends PlaySpecification with Mockito {
     /**
      * A Silhouette fake environment.
      */
-    implicit val env: Environment[User, SessionAuthenticator] = new FakeEnvironment[User, SessionAuthenticator](Seq(identity.loginInfo -> identity))
+    implicit val env: Environment[User, CookieAuthenticator] = new FakeEnvironment[User, CookieAuthenticator](Seq(identity.loginInfo -> identity))
 
     /**
      * The application.
