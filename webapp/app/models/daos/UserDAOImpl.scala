@@ -8,7 +8,6 @@ import models.User
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-
 import scala.language.postfixOps
 
 /**
@@ -64,9 +63,19 @@ object UserDAOImpl {
       get id loginInfo.providerKey from ("users/" + loginInfo.providerID)
     } map { response =>
       if (response.isExists) {
-        play.api.libs.json.Json
+        val user = play.api.libs.json.Json
           .parse(response.getSourceAsString)
-          .asOpt(User.format)
+
+        Some(
+          User(
+            loginInfo,
+            (user \ "firstName").asOpt[String],
+            (user \ "lastName").asOpt[String],
+            (user \ "fullName").asOpt[String],
+            (user \ "email").asOpt[String],
+            (user \ "avatar").asOpt[String]
+          )
+        )
       } else {
         None
       }
