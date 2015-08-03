@@ -1,7 +1,7 @@
 package models.daos
 
 import com.mohiva.play.silhouette.api.LoginInfo
-import com.sksamuel.elastic4s.ElasticClient.{local => elastic}
+import org.cthulhu.persistence.dao.Elastic.elastic
 import com.sksamuel.elastic4s.ElasticDsl._
 import com.sksamuel.elastic4s.mappings.FieldType._
 import models.User
@@ -30,7 +30,7 @@ class UserDAOImpl extends UserDAO {
    * @return The saved user.
    */
   def save(user: User) = UserDAOImpl.save(user)
-} 
+}
 
 /**
  * The companion object.
