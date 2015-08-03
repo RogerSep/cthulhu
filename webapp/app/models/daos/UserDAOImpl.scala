@@ -1,7 +1,7 @@
 package models.daos
 
 import com.mohiva.play.silhouette.api.LoginInfo
-import org.cthulhu.persistence.dao.Elastic.elastic
+import org.cthulhu.persistence.dao.Elastic
 import com.sksamuel.elastic4s.ElasticDsl._
 import com.sksamuel.elastic4s.mappings.FieldType._
 import models.User
@@ -21,7 +21,7 @@ class UserDAOImpl extends UserDAO {
    * @param loginInfo The login info of the user to find.
    * @return The found user or None if no user for the given login info could be found.
    */
-  def find(loginInfo: LoginInfo) = UserDAOImpl.find(loginInfo)
+  def find(loginInfo: LoginInfo) = UserDAOImpl.find _
 
   /**
    * Saves a user.
@@ -29,13 +29,13 @@ class UserDAOImpl extends UserDAO {
    * @param user The user to save.
    * @return The saved user.
    */
-  def save(user: User) = UserDAOImpl.save(user)
+  def save(user: User) = UserDAOImpl.save _
 }
 
 /**
  * The companion object.
  */
-object UserDAOImpl {
+object UserDAOImpl extends Elastic {
 
   elastic execute {
     index exists "users"
