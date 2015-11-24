@@ -26,5 +26,18 @@
                 </div>
             </div>
         </div>
+
+        <main>
+            <h1>Realtime Collaboration Quickstart</h1>
+            <p>Now that your application is running, simply type in either text box and see your changes instantly appear in the other one. Open
+                this same document in a <a onclick="window.open(window.location.href);return false;" target="_blank">new tab</a> to see it work across tabs.</p>
+            <textarea id="text_area_1"></textarea>
+            <textarea id="text_area_2"></textarea>
+            <button id="auth_button">Authorize</button>
+        </main>
+
+        <script src="https://apis.google.com/js/api.js"></script>
+        <script src="https://www.gstatic.com/realtime/realtime-client-utils.js"></script>
+        <script src="@routes.Assets.at("js/text-box-collab.js")" />
     </div>
 }

@@ -19,7 +19,7 @@ libraryDependencies ++= Seq(
   "net.ceedubs" %% "ficus" % "1.1.2",
   "com.adrianhurt" %% "play-bootstrap3" % "0.4.4-P24",
   "com.mohiva" %% "play-silhouette-testkit" % "3.0.0-RC2" % "test",
-  "com.sksamuel.elastic4s" %% "elastic4s-core" % "1.6.2",
+  "com.sksamuel.elastic4s" %% "elastic4s-core" % "1.7.4",
   specs2 % Test,
   cache,
   filters
