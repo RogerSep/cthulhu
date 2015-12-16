@@ -16,30 +16,30 @@ import play.api.mvc.Action
 import scala.concurrent.Future
 
 /**
- * The social auth controller.
- *
- * @param messagesApi The Play messages API.
- * @param env The Silhouette environment.
- * @param userService The user service implementation.
- * @param authInfoRepository The auth info service implementation.
- * @param socialProviderRegistry The social provider registry.
- */
+  * The social auth controller.
+  *
+  * @param messagesApi The Play messages API.
+  * @param env The Silhouette environment.
+  * @param userService The user service implementation.
+  * @param authInfoRepository The auth info service implementation.
+  * @param socialProviderRegistry The social provider registry.
+  */
 class SocialAuthController @Inject() (
-  val messagesApi: MessagesApi,
-  val env: Environment[User, CookieAuthenticator],
-  userService: UserService,
-  authInfoRepository: AuthInfoRepository,
-  socialProviderRegistry: SocialProviderRegistry)
+                                       val messagesApi: MessagesApi,
+                                       val env: Environment[User, CookieAuthenticator],
+                                       userService: UserService,
+                                       authInfoRepository: AuthInfoRepository,
+                                       socialProviderRegistry: SocialProviderRegistry)
   extends Silhouette[User, CookieAuthenticator] with Logger {
 
   /**
-   * Authenticates a user against a social provider.
-   *
-   * @param provider The ID of the provider to authenticate against.
-   * @return The result to display.
-   */
+    * Authenticates a user against a social provider.
+    *
+    * @param provider The ID of the provider to authenticate against.
+    * @return The result to display.
+    */
   def authenticate(provider: String) = Action.async { implicit request =>
-    (socialProviderRegistry.get(provider) match {
+    (socialProviderRegistry.get[SocialProvider](provider) match {
       case Some(p: SocialProvider with CommonSocialProfileBuilder) =>
         p.authenticate().flatMap {
           case Left(result) => Future.successful(result)

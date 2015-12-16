@@ -13,13 +13,16 @@ resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 libraryDependencies ++= Seq(
-  "com.mohiva" %% "play-silhouette" % "3.0.0-RC2",
+  "com.mohiva" % "play-silhouette_2.11" % "3.0.4",
   "org.webjars" %% "webjars-play" % "2.4.0",
   "net.codingwell" %% "scala-guice" % "4.0.0",
   "net.ceedubs" %% "ficus" % "1.1.2",
   "com.adrianhurt" %% "play-bootstrap3" % "0.4.4-P24",
   "com.mohiva" %% "play-silhouette-testkit" % "3.0.0-RC2" % "test",
   "com.sksamuel.elastic4s" %% "elastic4s-core" % "1.7.4",
+  "com.google.api-client" % "google-api-client" % "1.21.0",
+  "com.google.oauth-client" % "google-oauth-client-jetty" % "1.21.0",
+  "com.google.apis" % "google-api-services-drive" % "v3-rev1-1.21.0",
   specs2 % Test,
   cache,
   filters
