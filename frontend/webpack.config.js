@@ -14,7 +14,9 @@ const common = {
   entry: PATHS.app,
   output: {
     path : PATHS.build,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/assets/',
+    contentBase: 'http://localhost:9000'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -51,15 +53,7 @@ module.exports = merge(common, {
     proxy: {
       '*': {
         target: 'http://localhost:9000',
-        secure: false,
-        bypass: (req, resp, proxyOptions) => {
-          const bypass = req.params[0].startsWith('/assets/');
-          if (bypass) {
-            return req.params[0].replace('/assets/', '');
-          } else {
-            return false;
-          }
-        }
+        secure: false
       }
     }
   },
