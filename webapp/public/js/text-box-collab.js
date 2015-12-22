@@ -1,6 +1,28 @@
-var id = "0B86egKuALy-TOWFIYzFDa2pPbTQ";
+var id = "0B60GC0ICOsUTa3VvV0MwQmZsUVk";
 
-var clientId = '531838806517-k0n3hkar23fjc3ea1vhbtecvnkot9vua.apps.googleusercontent.com';
+window.gapi.load('auth:client,drive-realtime,drive-share', start);
+
+function start() {
+    var doc = gapi.drive.realtime.newInMemoryDocument();
+    var model = doc.getModel();
+    var collaborativeString = model.createString();
+    collaborativeString.setText('Welcome to the Quickstart App!');
+    model.getRoot().set('demo_string', collaborativeString);
+    wireTextBoxes(collaborativeString);
+    document.getElementById('json_button').addEventListener('click', function(){
+        document.getElementById('json_textarea').value = model.toJson();
+    });
+}
+
+// Connects the text boxes to the collaborative string.
+function wireTextBoxes(collaborativeString) {
+    var textArea1 = document.getElementById('text_area_1');
+    var textArea2 = document.getElementById('text_area_2');
+    gapi.drive.realtime.databinding.bindString(collaborativeString, textArea1);
+    gapi.drive.realtime.databinding.bindString(collaborativeString, textArea2);
+}
+
+/*var clientId = '531838806517-k0n3hkar23fjc3ea1vhbtecvnkot9vua.apps.googleusercontent.com';
 
 if (!/^([0-9])$/.test(clientId[0])) {
     alert('Invalid Client ID - did you forget to insert your application Client ID?');
@@ -67,4 +89,4 @@ function wireTextBoxes(collaborativeString) {
     var textArea2 = document.getElementById('text_area_2');
     gapi.drive.realtime.databinding.bindString(collaborativeString, textArea1);
     gapi.drive.realtime.databinding.bindString(collaborativeString, textArea2);
-}
+}*/

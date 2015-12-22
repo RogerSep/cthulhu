@@ -28,7 +28,7 @@ libraryDependencies ++= Seq(
   filters
 )
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb)
 
 routesGenerator := InjectedRoutesGenerator
 
@@ -44,6 +44,13 @@ scalacOptions ++= Seq(
   "-Ywarn-nullary-override", // Warn when non-nullary overrides nullary, e.g. def foo() over def foo.
   "-Ywarn-numeric-widen" // Warn when numerics are widened.
 )
+
+// Reloading assets on `activator run`
+play.PlayImport.PlayKeys.playRunHooks ++= Seq(
+  RunSubProcess("make watch")
+)
+
+
 
 //********************************************************
 // Scalariform settings
