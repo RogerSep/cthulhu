@@ -15,7 +15,6 @@ const common = {
   output: {
     path : PATHS.build,
     filename: 'bundle.js',
-    publicPath: '/assets/',
     contentBase: 'http://localhost:9000'
   },
   resolve: {

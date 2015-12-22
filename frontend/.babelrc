@@ -1,9 +1,5 @@
 {
-  "optional": [
-    "es7.decorators",
-    "es7.objectRestSpread",
-    "es7.classProperties"
-  ],
+  "presets": ["es2015", "stage-0", "react"],
   "env": {
     "start": {
       "plugins": [
