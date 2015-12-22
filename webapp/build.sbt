@@ -46,9 +46,9 @@ scalacOptions ++= Seq(
 )
 
 // Reloading assets on `activator run`
-play.PlayImport.PlayKeys.playRunHooks ++= Seq(
-  RunSubProcess("make watch")
-)
+//play.PlayImport.PlayKeys.playRunHooks ++= Seq(
+//  RunSubProcess("make watch")
+//)
 
 
 
