@@ -8,13 +8,14 @@ object Npm {
 
     object NpmProcess extends PlayRunHook {
       var process: Option[Process] = None
+      val frontEndDirectory = new File(base.getAbsolutePath + "/../frontend")
 
       override def beforeStarted(): Unit = {
-        Process("npm run watch", base).run
+
       }
 
       override def afterStarted(addr: InetSocketAddress): Unit = {
-        process = Some(Process("npm run watch", base).run)
+        process = Some(Process("npm start", frontEndDirectory).run)
       }
 
       override def afterStopped(): Unit = {

@@ -1,4 +1,6 @@
 import scalariform.formatter.preferences._
+import Npm._
+import play.sbt.PlayImport.PlayKeys.playRunHooks
 
 name := "play-silhouette-seed"
 
@@ -45,11 +47,7 @@ scalacOptions ++= Seq(
   "-Ywarn-numeric-widen" // Warn when numerics are widened.
 )
 
-// Reloading assets on `activator run`
-//play.PlayImport.PlayKeys.playRunHooks ++= Seq(
-//  RunSubProcess("make watch")
-//)
-
+playRunHooks <+= baseDirectory.map(base => Npm(base))
 
 
 //********************************************************

@@ -108,4 +108,8 @@ class ApplicationController @Inject() (
       execution.toPrettyString
     })
   }
+
+  def webpack = Action { request =>
+    Ok(views.html.webpack())
+  }
 }

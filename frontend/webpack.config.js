@@ -15,7 +15,8 @@ const common = {
   output: {
     path : PATHS.build,
     filename: 'bundle.js',
-    contentBase: 'http://localhost:9000'
+    contentBase: 'http://localhost:9000',
+    publicPath: 'http://localhost:8080/assets/'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -48,13 +49,7 @@ module.exports = merge(common, {
     progress: true,
     stats: 'errors-only',
     host: process.env.HOST,
-    port: process.env.PORT,
-    proxy: {
-      '*': {
-        target: 'http://localhost:9000',
-        secure: false
-      }
-    }
+    port: process.env.PORT
   },
   module: {
     loaders: [{
