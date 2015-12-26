@@ -1,0 +1,17 @@
+.example {
+  background-color: black;
+  color: yellow;
+
+  li {
+    border: 1px blue solid;
+  }
+}
+
+.shouldBeWorking {
+  background-color: yellow;
+  color: black;
+
+  li {
+    border: 1px red solid;
+  }
+}

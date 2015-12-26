@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import css from './main.scss';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,17 +15,17 @@ class App extends React.Component {
 
   render() {
     const showEven = this.state.showEven;
-    const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].filter(x => {
+    const arr = [1, 2, 3, 4, 5, 6, 0].filter(x => {
       if (showEven) {
         return x % 2 === 0
       } else {
         return x % 2 !== 0;
       }
     });
-    const renderNum = (num, index) => <li key={num}>{num}</li>;
+    const renderNum = (num, index) => <li key={num.toString() + index.toString()}>{num}</li>;
 
     return (
-      <ul onClick={this.toggle}>
+      <ul onClick={this.toggle} className={showEven ? css.example : css.shouldBeWorking}>
         {arr.map(renderNum)}
       </ul>
     );

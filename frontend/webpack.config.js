@@ -35,6 +35,16 @@ const common = {
         test: /\.jsx?$/,
         loaders: ['babel'],
         include: PATHS.app
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass?sourceMap'),
+        include: PATHS.app
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader'],
+        include: PATHS.app
       }
     ]
   }
@@ -51,14 +61,8 @@ module.exports = merge(common, {
     host: process.env.HOST,
     port: process.env.PORT
   },
-  module: {
-    loaders: [{
-      test: /\.css$/,
-      loaders: ["style", "css"],
-      include: PATHS.app
-    }]
-  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('bundle.css')
   ]
 });
