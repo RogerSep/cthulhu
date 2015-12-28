@@ -35,7 +35,7 @@ class ApplicationController @Inject() (
    * @return The result to display.
    */
   def index = SecuredAction.async { implicit request =>
-    Future.successful(Ok(views.html.home(request.identity)))
+    Future.successful(Ok(views.html.index()))
   }
 
   /**
@@ -109,7 +109,4 @@ class ApplicationController @Inject() (
     })
   }
 
-  def webpack = Action { request =>
-    Ok(views.html.webpack())
-  }
 }
