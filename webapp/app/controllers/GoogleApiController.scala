@@ -50,13 +50,13 @@ class GoogleApiController @Inject() (
       val files = service
         .files()
         .list()
-        .setQ(s"'$email' in writers or '$email' in readers")
+        .setQ(s"('$email' in writers or '$email' in readers) and mimeType = '${drive.Types.Files.Folder}'")
         .execute()
 
-      files.asScala.toList
+      files.getFiles.asScala.toList
     }
 
-    Ok(Json.toJson(s"'$email' in writers or '$email' in readers" :: files.map {_.toString()}))
+    Ok(Json.toJson(files.map(file => Json.parse(file.toString))))
   }
 
 }
