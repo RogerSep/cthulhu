@@ -19,12 +19,12 @@ const common = {
     publicPath: 'http://localhost:8080/assets/'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js']
   },
   module: {
     preLoaders: [
       {
-        test: /\.jsx?/,
+        test: /\.js$/,
         loaders: ['eslint'],
         include: PATHS.app,
         exclude: [PATHS.build, './node_modules']
@@ -32,18 +32,13 @@ const common = {
     ],
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         loaders: ['babel'],
         include: PATHS.app
       },
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style', 'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader?sourceMap'),
-        include: PATHS.app
-      },
-      {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
         include: PATHS.app
       }
     ]

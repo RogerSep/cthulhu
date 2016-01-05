@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "scripts": {
     "start": "webpack-dev-server",
@@ -34,9 +34,7 @@
     "node-sass": "^3.4.2",
     "phantomjs": "^1.9.19",
     "phantomjs-polyfill": "0.0.1",
-    "react": "^0.14.3",
     "react-addons-test-utils": "^0.14.3",
-    "react-dnd": "^2.0.2",
     "react-dnd-test-backend": "^1.0.0",
     "react-transform-hmr": "^1.0.1",
     "sass-loader": "^3.1.2",
