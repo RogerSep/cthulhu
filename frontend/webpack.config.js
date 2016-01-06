@@ -5,6 +5,8 @@ const pkg = require('./package.json');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const Clean = require('clean-webpack-plugin');
 
+const DEFAULT_PORT = 3000;
+
 const PATHS = {
   app: path.resolve(__dirname, 'app'),
   build: path.resolve(__dirname, '../webapp/public')
@@ -16,7 +18,7 @@ const common = {
     path : PATHS.build,
     filename: 'bundle.js',
     contentBase: 'http://localhost:9000',
-    publicPath: 'http://localhost:8080/assets/'
+    publicPath: `http://localhost:${DEFAULT_PORT}/assets/`
   },
   resolve: {
     extensions: ['', '.js']
@@ -33,7 +35,7 @@ const common = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel'],
+        loaders: ['react-hot', 'babel'],
         include: PATHS.app
       },
       {
@@ -54,7 +56,7 @@ module.exports = merge(common, {
     progress: true,
     stats: 'errors-only',
     host: process.env.HOST,
-    port: process.env.PORT
+    port: process.env.PORT || DEFAULT_PORT
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
