@@ -1,52 +1,22 @@
+import 'babel-polyfill';
 import React from 'react';
 import ReactDom from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk'
+import reducer from './redux/reducers/projects';
+import projects from './redux/action-creators/projects';
+import Root from './components/Root';
 import css from './main.scss';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const initialState = {};
+const createStoreWithMiddleware = applyMiddleware(
+  thunkMiddleware
+)(createStore);
+const store = createStoreWithMiddleware(reducer, initialState);
 
-    this.state = {
-      showEven: false
-    };
+store.dispatch(projects.fetchProjects());
 
-    this.toggle = this.toggle.bind(this);
-  }
+const app = document.createElement('div');
+document.body.appendChild(app);
 
-  render() {
-    const showEven = this.state.showEven;
-    const arr = [1, 2, 3, 4, 5, 6, 0].filter(x => {
-      if (showEven) {
-        return x % 2 === 0
-      } else {
-        return x % 2 !== 0;
-      }
-    });
-    const renderNum = (num, index) => <li key={num.toString() + index.toString()}>{num}</li>;
-
-    return (
-      <ul onClick={this.toggle} className={showEven ? css.example : css.shouldBeWorking}>
-        {arr.map(renderNum)}
-      </ul>
-    );
-  }
-
-  toggle() {
-    this.setState({
-      showEven: !(this.state.showEven || false)
-    });
-  }
-
-  renderNum(num) {
-    return <li key={num}>{num}</li>;
-  }
-}
-
-function main() {
-  const app = document.createElement('div');
-  document.body.appendChild(app);
-
-  ReactDom.render(<App />, app)
-}
-
-main();
+ReactDom.render(<Root store={store} />, app);

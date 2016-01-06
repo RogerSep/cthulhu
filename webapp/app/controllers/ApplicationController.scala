@@ -12,6 +12,7 @@ import models.daos.OAuth2InfoDAO
 import org.cthulhu.service.google.drive.GoogleDriveServiceImpl
 import play.api.i18n.MessagesApi
 import play.api.mvc.Action
+import play.api.routing.JavaScriptReverseRouter
 
 import scala.concurrent.Future
 import scala.collection.JavaConverters._
@@ -107,6 +108,15 @@ class ApplicationController @Inject() (
 
       execution.toPrettyString
     })
+  }
+
+  def javascriptRoutes = Action { implicit request =>
+    Ok(
+      JavaScriptReverseRouter("jsRoutes")(
+        routes.javascript.GoogleApiController.createProject,
+        routes.javascript.GoogleApiController.list
+      )
+    ).as("text/javascript")
   }
 
 }
