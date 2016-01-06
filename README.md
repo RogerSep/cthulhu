@@ -5,10 +5,10 @@
 Open the terminal and run:
 
 ```
-npm i
+cd frontend && npm i
 ```
 
-<!-- ## TODO -->
+## TODO
 
 - [ ] Unit testing suite for FE.
 - [ ] Webpack for production.
