@@ -1,22 +1,24 @@
-import * as Types from '../action-types/projects';
+import {
+  FETCH_PROJECTS,
+  SUCCESS_PROJECTS
+} from '../actions/action-creators';
 
 export default (state = {}, action) => {
   switch(action.type) {
-    case Types.FETCH_PROJECTS:
+    case FETCH_PROJECTS:
       return {
         ...state,
         isFetching: true
       };
-      break;
-    case Types.SUCCESS_PROJECTS:
+
+    case SUCCESS_PROJECTS:
       return {
         ...state,
         isFetching: false,
         projects: action.data
       };
-      break;
+
     default:
       return state;
-      break;
   }
 };
