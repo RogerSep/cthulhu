@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import React from 'react';
-import ReactDom from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
@@ -20,4 +21,9 @@ store.dispatch(fetchProjects()); // TODO: Delete this
 const app = document.createElement('div');
 document.body.appendChild(app);
 
-ReactDom.render(<Root store={store} />, app);
+render(
+  <Provider store={store}>
+    <Root />
+  </Provider>,
+  app
+);
