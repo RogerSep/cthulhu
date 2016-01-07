@@ -18,3 +18,4 @@ dist
 /data
 
 conf/*.p12
+conf/application.local.conf
