@@ -39,6 +39,8 @@ class ApplicationController @Inject() (
     Future.successful(Ok(views.html.index()))
   }
 
+  def indexPath(path: String) = index()
+
   /**
    * Handles the Sign In action.
    *

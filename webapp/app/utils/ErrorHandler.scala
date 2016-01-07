@@ -6,10 +6,11 @@ import com.mohiva.play.silhouette.api.SecuredErrorHandler
 import controllers.routes
 import play.api.http.DefaultHttpErrorHandler
 import play.api.i18n.Messages
+import play.api.libs.json.Json
 import play.api.mvc.Results._
-import play.api.mvc.{ Result, RequestHeader }
+import play.api.mvc._
 import play.api.routing.Router
-import play.api.{ OptionalSourceMapper, Configuration }
+import play.api.{UsefulException, Configuration, OptionalSourceMapper}
 
 import scala.concurrent.Future
 
@@ -22,7 +23,16 @@ class ErrorHandler @Inject() (
   sourceMapper: OptionalSourceMapper,
   router: javax.inject.Provider[Router])
   extends DefaultHttpErrorHandler(env, config, sourceMapper, router)
-  with SecuredErrorHandler {
+  with SecuredErrorHandler with Rendering with AcceptExtractors {
+
+  private def loginRequired(request: RequestHeader, messages: Messages): Option[Future[Result]] = {
+    val result = render({
+      case Accepts.Json() => Forbidden(Json.toJson(Messages("access.denied")(messages)))
+      case Accepts.Html() => Redirect(routes.ApplicationController.signIn()).flashing("error" -> Messages("access.denied")(messages))
+    })(request)
+
+    Some(Future.successful(result))
+  }
 
   /**
    * Called when a user is not authenticated.
@@ -33,9 +43,7 @@ class ErrorHandler @Inject() (
    * @param messages The messages for the current language.
    * @return The result to send to the client.
    */
-  override def onNotAuthenticated(request: RequestHeader, messages: Messages): Option[Future[Result]] = {
-    Some(Future.successful(Redirect(routes.ApplicationController.signIn())))
-  }
+  override def onNotAuthenticated(request: RequestHeader, messages: Messages): Option[Future[Result]] = loginRequired(request, messages)
 
   /**
    * Called when a user is authenticated but not authorized.
@@ -46,7 +54,5 @@ class ErrorHandler @Inject() (
    * @param messages The messages for the current language.
    * @return The result to send to the client.
    */
-  override def onNotAuthorized(request: RequestHeader, messages: Messages): Option[Future[Result]] = {
-    Some(Future.successful(Redirect(routes.ApplicationController.signIn()).flashing("error" -> Messages("access.denied")(messages))))
-  }
+  override def onNotAuthorized(request: RequestHeader, messages: Messages): Option[Future[Result]] = loginRequired(request, messages)
 }
