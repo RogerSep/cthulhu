@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { pushPath } from 'redux-simple-router';
 import css from '../main.scss';
 
 class Root extends React.Component {
@@ -8,14 +9,21 @@ class Root extends React.Component {
   }
 
   render() {
+    const { dispatch } = this.props;
     return (
-      <div className={ css.example }>Hello world! {JSON.stringify(this.props)}</div>
+      <div className={ css.example }>
+        Hello world!
+        {this.props.children}
+        <button onClick={() => dispatch(pushPath('/bla'))}>Go to Bla!</button>
+      </div>
     );
   }
 }
 
-function selectProps(state) {
-  return state;
+function selectProps({ projects }) {
+  return {
+    projects
+  };
 }
 
 export default connect(selectProps)(Root);
