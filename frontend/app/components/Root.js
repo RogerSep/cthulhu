@@ -1,4 +1,5 @@
 import React from 'react';
+import css from '../main.scss';
 
 export default class Root extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class Root extends React.Component {
 
   render() {
     return (
-      <div>Hello world! {JSON.stringify(this.props.store.getState())}</div>
+      <div className={ css.example }>Hello world! {JSON.stringify(this.props.store.getState())}</div>
     );
   }
 }
