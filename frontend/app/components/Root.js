@@ -14,7 +14,10 @@ class Root extends React.Component {
       <div className={ css.example }>
         Hello world!
         {this.props.children}
-        <button onClick={() => dispatch(pushPath('/bla'))}>Go to Bla!</button>
+        <div>
+          <button onClick={() => dispatch(pushPath('/'))}>Go to Home!</button>
+          <button onClick={() => dispatch(pushPath('/bla'))}>Go to Bla!</button>
+        </div>
       </div>
     );
   }

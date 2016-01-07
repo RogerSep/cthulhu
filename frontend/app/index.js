@@ -9,8 +9,7 @@ import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import { fetchProjects } from './redux/actions/action-creators'; // TODO: Delete this
-import Root from './components/Root';
-import Bla from './components/Bla';
+import { Root, Bla } from './components';
 import reducers from './redux/reducers/reducers';
 
 const createStoreWithMiddleware = applyMiddleware(
