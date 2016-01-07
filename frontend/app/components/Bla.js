@@ -1,5 +1,9 @@
 import React from 'react';
+import fetchOnUpdate from '../decorators/fetchOnUpdate';
 
+@fetchOnUpdate([], (_, actions) => {
+  actions.fetchProjects();
+})
 class Bla extends React.Component {
   constructor(props) {
     super(props);
@@ -7,7 +11,7 @@ class Bla extends React.Component {
 
   render() {
     return (
-      <div>Hola from Bla!</div>
+      <div>Hola from Bla!!!</div>
     );
   }
 }

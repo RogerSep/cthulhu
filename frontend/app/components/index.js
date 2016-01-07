@@ -1,2 +1,2 @@
-export Bla from './Bla';
-export Root from './Root';
+export { Bla as Bla } from './Bla';
+export { Root as Root } from './Root';
