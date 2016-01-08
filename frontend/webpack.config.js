@@ -1,9 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const pkg = require('./package.json');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const Clean = require('clean-webpack-plugin');
 
 const DEFAULT_PORT = 3000;
 
