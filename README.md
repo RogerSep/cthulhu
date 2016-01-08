@@ -10,7 +10,7 @@ cd frontend && npm i
 
 ## TODO
 
-- [ ] Unit testing suite for FE.
+- [ ] Configure Isparta or use Istanbul
 - [ ] Webpack for production.
 - [ ] Organize folder structure for FE.
 
