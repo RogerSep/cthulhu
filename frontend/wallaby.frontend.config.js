@@ -2,14 +2,6 @@ var babel = require('babel-core');
 var wallabyWebpack = require('wallaby-webpack');
 
 var webpackPostprocessor = wallabyWebpack({
-  module: {
-    loaders: [
-      {
-        test: /sinon.*\.js$/,
-        loader: 'imports?define=>false'
-      }
-    ]
-  }
 });
 
 module.exports = function (wallaby) {
