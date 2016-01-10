@@ -8,7 +8,6 @@ import { createHistory } from 'history';
 import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
-import { fetchProjects } from './redux/actions/action-creators'; // TODO: Delete this
 import { Root, Bla } from './components';
 import reducers from './redux/reducers/reducers';
 
@@ -25,8 +24,6 @@ const store = createStoreWithMiddleware(reducer);
 const history = createHistory();
 
 syncReduxAndRouter(history, store);
-
-store.dispatch(fetchProjects()); // TODO: Delete this
 
 const app = document.createElement('div');
 document.body.appendChild(app);

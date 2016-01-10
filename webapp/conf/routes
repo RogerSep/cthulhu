@@ -12,7 +12,8 @@ GET     /drive/projects                 controllers.GoogleApiController.list(pro
 GET     /javascriptRoutes               controllers.ApplicationController.javascriptRoutes
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file                  controllers.Assets.at(path="/public", file)
-GET     /webjars/*file                 controllers.WebJarAssets.at(file)
+GET     /assets/*file                   controllers.Assets.at(path="/public", file)
+GET     /webjars/*file                  controllers.WebJarAssets.at(file)
 
-GET     /*path                         controllers.ApplicationController.indexPath(path)
+# Because this is a simple page app. indexPath is the same as index, the path variable is there only to make a match.
+GET     /*path                          controllers.ApplicationController.indexPath(path)
