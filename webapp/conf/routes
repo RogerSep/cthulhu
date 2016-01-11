@@ -8,6 +8,7 @@ GET     /signIn                         controllers.ApplicationController.signIn
 GET     /signOut                        controllers.ApplicationController.signOut
 GET     /authenticate/:provider         controllers.SocialAuthController.authenticate(provider)
 GET     /drive/projects/create/:project controllers.GoogleApiController.createProject(project)
+GET     /drive/projects/delete/:project controllers.GoogleApiController.deleteProject(project)
 GET     /drive/projects                 controllers.GoogleApiController.list(projectId: Option[String])
 GET     /javascriptRoutes               controllers.ApplicationController.javascriptRoutes
 

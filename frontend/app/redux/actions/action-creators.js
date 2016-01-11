@@ -9,7 +9,17 @@ export const FAILURE_PROJECTS = 'FAILURE_PROJECTS';
 export const FETCH_PROJECTS = 'FETCH_PROJECTS';
 export const fetchProjects = () => dispatch => {
   dispatch({ type: FETCH_PROJECTS });
-  fetch('/drive/projects', { credentials: 'same-origin' })
+  return fetch('/drive/projects', { credentials: 'same-origin' })
     .then(response => response.json())
     .then(json => dispatch(successProjects(json)));
 };
+
+export const CREATE_PROJECT = 'CREATE_PROJECT';
+export const createProject = (projectName) => dispatch => {
+  dispatch({ type: CREATE_PROJECT });
+  return fetch(`/drive/projects/create/${encodeURIComponent(projectName)}`, {credentials: 'same-origin'})
+    .then(response => response.json())
+    .then(json => dispatch({ type: PROJECT_CREATION, data: json }));
+};
+
+export const PROJECT_CREATION = 'PROJECT_CREATION';

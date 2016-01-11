@@ -27,7 +27,7 @@ class GoogleApiController @Inject() (
         .create(new File()
           .setName(name)
           .setMimeType(drive.Types.Files.Folder))
-        .setFields("id")
+        .setFields("id, name")
         .execute()
 
       val permission = new Permission()
@@ -40,7 +40,15 @@ class GoogleApiController @Inject() (
       folder
     }
 
-    Ok(Json.toJson(Map("id" -> folder.getId)))
+    Ok(Json.parse(folder.toString))
+  }
+
+  def deleteProject(id: String) = SecuredAction { request =>
+    val result = drive.execute { service =>
+      service.files().delete(id).execute()
+    }
+
+    Ok("deleted")
   }
 
   def list(projectId: Option[String]) = SecuredAction { request =>
