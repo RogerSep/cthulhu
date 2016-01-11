@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
 import css from '../main.scss';
 import { bindActionCreators } from 'redux';
-import { fetchProjects, successProjects, createProject } from '../redux/actions/action-creators';
+import { fetchProjects, successProjects, createProject, fetchItems } from '../redux/actions/action-creators';
 
 class Root extends React.Component {
   constructor(props) {
@@ -27,5 +27,10 @@ function selectProps({ projects }) {
 }
 
 export default connect(selectProps, dispatch => ({
-  actions: bindActionCreators({fetchProjects, successProjects, createProject}, dispatch)
+  actions: bindActionCreators({
+    fetchProjects,
+    successProjects,
+    createProject,
+    fetchItems
+  }, dispatch)
 }))(Root);

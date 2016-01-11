@@ -23,3 +23,13 @@ export const createProject = (projectName) => dispatch => {
 };
 
 export const PROJECT_CREATION = 'PROJECT_CREATION';
+
+export const FETCH_ITEMS = 'FETCH_ITEMS';
+export const fetchItems = containerId => dispatch => {
+  dispatch({ type: FETCH_ITEMS });
+  return fetch(`/drive/projects?projectId=${encodeURIComponent(containerId)}`, {credentials: 'same-origin'})
+    .then(response => response.json())
+    .then(json => dispatch({ type: ITEMS_FETCHED, data: json }));
+}
+
+export const ITEMS_FETCHED = 'ITEMS_FETCHED';

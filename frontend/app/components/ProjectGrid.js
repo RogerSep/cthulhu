@@ -1,8 +1,6 @@
 import React from 'react';
 import fetchOnUpdate from '../decorators/fetchOnUpdate';
-import { Link } from 'react-router';
 import CollaborativeItem, { CollaborativeItemCreator } from './presentational/CollaborativeItem';
-import { createProject } from '../redux/actions/action-creators';
 
 class ProjectGrid extends React.Component {
   constructor(props) {

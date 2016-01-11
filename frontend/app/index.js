@@ -8,7 +8,7 @@ import { createHistory } from 'history';
 import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
-import { Root, ProjectGrid } from './components';
+import { Root, ProjectGrid, DocumentationGrid } from './components';
 import reducers from './redux/reducers/reducers';
 
 const createStoreWithMiddleware = applyMiddleware(
@@ -33,6 +33,7 @@ render(
     <Router history={history}>
       <Route path="/" component={Root}>
         <IndexRoute component={ProjectGrid} />
+        <Route path="projects/:projectId" component={DocumentationGrid} />
       </Route>
     </Router>
   </Provider>,

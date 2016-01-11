@@ -53,12 +53,14 @@ class GoogleApiController @Inject() (
 
   def list(projectId: Option[String]) = SecuredAction { request =>
     val email = request.identity.email.get
+    val query = s"('$email' in writers or '$email' in readers) and mimeType = '${drive.Types.Files.Folder}'" +
+      projectId.map(id => s" and '$id' in parents").getOrElse("")
 
     val files = drive execute { service =>
       val files = service
         .files()
         .list()
-        .setQ(s"('$email' in writers or '$email' in readers) and mimeType = '${drive.Types.Files.Folder}'")
+        .setQ(query)
         .execute()
 
       files.getFiles.asScala.toList
