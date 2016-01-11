@@ -2,7 +2,10 @@ import React from 'react';
 import fetchOnUpdate from '../decorators/fetchOnUpdate';
 import CollaborativeItem, { CollaborativeItemCreator } from './presentational/CollaborativeItem';
 
-class DocumentationGrid extends React.Component {
+@fetchOnUpdate(['projectId'], (params, actions) => {
+  actions.fetchItems(params.projectId);
+})
+export default class DocumentationGrid extends React.Component {
   constructor (props) {
     super(props);
   }
@@ -25,6 +28,3 @@ class DocumentationGrid extends React.Component {
   };
 }
 
-export default fetchOnUpdate(['projectId'], (params, actions) => {
-  actions.fetchItems(params.projectId);
-})(DocumentationGrid);

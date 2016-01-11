@@ -2,7 +2,10 @@ import React from 'react';
 import fetchOnUpdate from '../decorators/fetchOnUpdate';
 import CollaborativeItem, { CollaborativeItemCreator } from './presentational/CollaborativeItem';
 
-class ProjectGrid extends React.Component {
+@fetchOnUpdate([], (_, actions) => {
+  actions.fetchProjects();
+})
+export default class ProjectGrid extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -27,6 +30,3 @@ class ProjectGrid extends React.Component {
   };
 }
 
-export default fetchOnUpdate([], (_, actions) => {
-  actions.fetchProjects();
-})(ProjectGrid);
