@@ -18,12 +18,12 @@ class ProjectGrid extends React.Component {
     );
   }
 
-  renderProject (project) {
-    return <CollaborativeItem key={project.id} name={project.name} link={`/projects/${project.id}`} />;
+  renderProject ({ id, name }) {
+    return <CollaborativeItem key={id} name={name} link={`/projects/${id}`} />;
   }
 
   create = (name) => {
-    this.props.actions.createProject(name)
+    this.props.actions.createProject(name);
   };
 }
 

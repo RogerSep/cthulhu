@@ -30,6 +30,6 @@ export const fetchItems = containerId => dispatch => {
   return fetch(`/drive/projects?projectId=${encodeURIComponent(containerId)}`, {credentials: 'same-origin'})
     .then(response => response.json())
     .then(json => dispatch({ type: ITEMS_FETCHED, data: json }));
-}
+};
 
 export const ITEMS_FETCHED = 'ITEMS_FETCHED';

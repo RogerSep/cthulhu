@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import css from './collaborative-item.scss';
 
 class CollaborativeItem extends React.Component {
-
   static propTypes = {
     link: PropTypes.string,
     name: PropTypes.string
@@ -22,11 +21,9 @@ class CollaborativeItem extends React.Component {
       </Link>
     )
   }
-
 }
 
 class CollaborativeItemCreator extends React.Component {
-
   static propTypes = {
     create: PropTypes.func.isRequired
   };
@@ -47,7 +44,6 @@ class CollaborativeItemCreator extends React.Component {
       this.props.create(e.target.value);
     }
   };
-
 }
 
 export default CollaborativeItem;

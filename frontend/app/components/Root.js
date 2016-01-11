@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
 import css from '../main.scss';
 import { bindActionCreators } from 'redux';
-import { fetchProjects, successProjects, createProject, fetchItems } from '../redux/actions/action-creators';
+import {
+  fetchProjects,
+  successProjects,
+  createProject,
+  fetchItems
+} from '../redux/actions/action-creators';
 
 class Root extends React.Component {
   constructor(props) {
