@@ -19,32 +19,8 @@ class CollaborativeItem extends React.Component {
           {this.props.name}
         </div>
       </Link>
-    )
-  }
-}
-
-class CollaborativeItemCreator extends React.Component {
-  static propTypes = {
-    create: PropTypes.func.isRequired
-  };
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <input
-        onKeyPress={this.create}/>
     );
   }
-
-  create = (e) => {
-    if (e.key === 'Enter' && e.target.value) {
-      this.props.create(e.target.value);
-    }
-  };
 }
 
 export default CollaborativeItem;
-export { CollaborativeItemCreator };

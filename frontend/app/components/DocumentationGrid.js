@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import fetchOnUpdate from '../decorators/fetchOnUpdate';
-import CollaborativeItem, { CollaborativeItemCreator } from './presentational/CollaborativeItem';
+import CollaborativeItem from './presentational/CollaborativeItem';
+import CollaborativeItemCreator from './presentational/CollaborativeItemCreator';
 
 class DocumentationGrid extends React.Component {
+  static propTypes = {
+    items: PropTypes.array,
+    actions: PropTypes.object
+  };
+
   constructor(props) {
     super(props);
   }
@@ -18,11 +24,18 @@ class DocumentationGrid extends React.Component {
     );
   }
 
-  renderItem = item => <CollaborativeItem key={item.id} name={item.name} link={``}/>;
+  renderItem(item) {
+    return (
+      <CollaborativeItem
+        key={item.id}
+        name={item.name}
+        link={``}/>
+    );
+  }
 
-  create = (name) => {
+  create(name) {
     this.props.actions.createItem(name);
-  };
+  }
 }
 
 export default fetchOnUpdate(['projectId'], (params, actions) => {

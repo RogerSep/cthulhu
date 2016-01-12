@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import shallowEqual from 'react-redux/lib/utils/shallowEqual';
 
 function mapParams(paramKeys, params) {
-  return paramKeys.reduce(({...acc}, key) => {
+  return paramKeys.reduce(({ ...acc }, key) => {
     return {
       ...acc,
       [key]: params[key]
@@ -13,6 +13,7 @@ function mapParams(paramKeys, params) {
 export default function fetchOnUpdate(paramKeys, fn) {
   return DecoratedComponent =>
     class FetchOnUpdateDecorator extends React.Component {
+      static displayName = 'FetchOnUpdateDecorator';
 
       static propTypes = {
         actions: PropTypes.object,
@@ -37,5 +38,5 @@ export default function fetchOnUpdate(paramKeys, fn) {
           <DecoratedComponent {...this.props} />
         );
       }
-    }
+    };
 }
