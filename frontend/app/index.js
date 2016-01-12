@@ -10,7 +10,6 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import { Root, ProjectGrid, Document } from './components';
 import reducers from './redux/reducers/reducers';
-import './styles/_base.scss';
 
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware,

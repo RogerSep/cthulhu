@@ -9,6 +9,8 @@ import {
   fetchItems
 } from '../redux/actions/action-creators';
 
+import commonStyles from '../styles/_base.scss';
+
 class Root extends React.Component {
   static propTypes = {
     children: PropTypes.object
