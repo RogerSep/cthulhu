@@ -13,7 +13,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_PROJECTS:
 
     case CREATE_PROJECT:
@@ -38,6 +38,7 @@ export default (state = initialState, action) => {
         projects: [...state.projects, ...action.data]
       };
 
+          return project;
     default:
       return state;
   }
