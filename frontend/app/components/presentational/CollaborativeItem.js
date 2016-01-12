@@ -8,11 +8,11 @@ class CollaborativeItem extends React.Component {
     name: PropTypes.string
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
 
-  render () {
+  render() {
     return (
       <Link to={this.props.link}>
         <div className={css.gridItem}>
@@ -28,14 +28,14 @@ class CollaborativeItemCreator extends React.Component {
     create: PropTypes.func.isRequired
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
 
-  render () {
+  render() {
     return (
       <input
-        onKeyPress={this.create} />
+        onKeyPress={this.create}/>
     );
   }
 

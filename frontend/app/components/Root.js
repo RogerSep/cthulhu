@@ -29,8 +29,7 @@ export default class Root extends React.Component {
   render() {
     return (
       <div className={ css.example }>
-        {this.props.children &&
-          React.cloneElement(this.props.children, { ...this.props })}
+        {this.props.children && React.cloneElement(this.props.children, { ...this.props })}
       </div>
     );
   }

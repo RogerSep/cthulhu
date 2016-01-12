@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import shallowEqual from 'react-redux/lib/utils/shallowEqual';
 
-function mapParams (paramKeys, params) {
+function mapParams(paramKeys, params) {
   return paramKeys.reduce(({...acc}, key) => {
     return {
       ...acc,
@@ -10,7 +10,7 @@ function mapParams (paramKeys, params) {
   }, {});
 }
 
-export default function fetchOnUpdate (paramKeys, fn) {
+export default function fetchOnUpdate(paramKeys, fn) {
   return DecoratedComponent =>
     class FetchOnUpdateDecorator extends React.Component {
 
@@ -19,11 +19,11 @@ export default function fetchOnUpdate (paramKeys, fn) {
         params: PropTypes.object
       };
 
-      componentWillMount () {
+      componentWillMount() {
         fn(mapParams(paramKeys, this.props.params), this.props.actions);
       }
 
-      componentDidUpdate (previousProps) {
+      componentDidUpdate(previousProps) {
         const params = mapParams(paramKeys, this.props.params);
         const previousParams = mapParams(paramKeys, previousProps.params);
 
@@ -32,11 +32,10 @@ export default function fetchOnUpdate (paramKeys, fn) {
         }
       }
 
-      render () {
+      render() {
         return (
           <DecoratedComponent {...this.props} />
         );
       }
-
     }
 }

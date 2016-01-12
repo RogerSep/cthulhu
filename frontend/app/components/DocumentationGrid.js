@@ -6,22 +6,22 @@ import CollaborativeItem, { CollaborativeItemCreator } from './presentational/Co
   actions.fetchItems(params.projectId);
 })
 export default class DocumentationGrid extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
 
-  render () {
+  render() {
     const items = this.props.items || [];
 
     return (
       <div>
         {items}
-        <CollaborativeItemCreator create={this.create} />
+        <CollaborativeItemCreator create={this.create}/>
       </div>
     );
   }
 
-  renderItem = item => <CollaborativeItem key={item.id} name={item.name} link={``} />;
+  renderItem = item => <CollaborativeItem key={item.id} name={item.name} link={``}/>;
 
   create = (name) => {
     this.props.actions.createItem(name);
