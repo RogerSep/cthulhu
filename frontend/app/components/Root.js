@@ -10,18 +10,7 @@ import {
   fetchItems
 } from '../redux/actions/action-creators';
 
-const actions = {
-  fetchProjects,
-  successProjects,
-  createProject,
-  fetchItems
-};
-
-@connect(
-  state => ({ projects: state.projects }),
-  dispatch => ({ actions: bindActionCreators(actions, dispatch) })
-)
-export default class Root extends React.Component {
+class Root extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -34,3 +23,17 @@ export default class Root extends React.Component {
     );
   }
 }
+
+export default connect(
+  state => ({
+    projects: state.projects
+  }),
+  dispatch => ({
+    actions: bindActionCreators({
+      fetchProjects,
+      successProjects,
+      createProject,
+      fetchItems
+    }, dispatch)
+  })
+)(Root);
