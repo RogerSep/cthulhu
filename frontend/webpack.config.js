@@ -38,7 +38,9 @@ const common = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', 'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader?sourceMap'),
+        // for Production
+        // loader: ExtractTextPlugin.extract('style', 'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader?sourceMap'),
+        loader: 'style-loader!css-loader?sourceMap&modules!sass-loader?sourceMap',
         include: PATHS.app
       }
     ]
@@ -57,7 +59,6 @@ module.exports = merge(common, {
     port: process.env.PORT || DEFAULT_PORT
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('bundle.css')
+    new webpack.HotModuleReplacementPlugin()
   ]
 });
