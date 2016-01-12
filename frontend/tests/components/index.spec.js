@@ -1,0 +1,3 @@
+describe('components/index', () => {
+
+});

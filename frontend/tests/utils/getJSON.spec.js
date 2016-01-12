@@ -1,0 +1,3 @@
+describe('getJSON utility', () => {
+
+});
