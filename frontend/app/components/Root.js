@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
-import css from '../main.scss';
 import { bindActionCreators } from 'redux';
 import {
   fetchProjects,
@@ -21,7 +20,7 @@ class Root extends React.Component {
 
   render() {
     return (
-      <div className={css.example}>
+      <div>
         {this.props.children && React.cloneElement(this.props.children, { ...this.props })}
       </div>
     );
