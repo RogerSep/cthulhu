@@ -8,7 +8,7 @@ import { createHistory } from 'history';
 import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
-import { Root, ProjectGrid, DocumentationGrid } from './components';
+import { Root, ProjectGrid, Document } from './components';
 import reducers from './redux/reducers/reducers';
 
 const createStoreWithMiddleware = applyMiddleware(
@@ -28,12 +28,14 @@ syncReduxAndRouter(history, store);
 const app = document.createElement('div');
 document.body.appendChild(app);
 
+window.gapi.load('auth:client,drive-realtime');
+
 render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={Root}>
         <IndexRoute component={ProjectGrid} />
-        <Route path="projects/:projectId" component={DocumentationGrid} />
+        <Route path="projects/:projectId" component={Document} />
       </Route>
     </Router>
   </Provider>,

@@ -9,8 +9,7 @@ import {
 
 const initialState = {
   isFetching: false,
-  projects: [],
-  items: []
+  projects: []
 };
 
 export default (state = initialState, action) => {
@@ -37,22 +36,6 @@ export default (state = initialState, action) => {
         ...state,
         isFetching: false,
         projects: [...state.projects, ...action.data]
-      };
-
-    case ITEMS_FETCHED:
-      return {
-        ...state,
-        isFetching: false,
-        items: state.projects.map(project => {
-          if (project.id === action.parentId) {
-            return {
-              ...project,
-              items: action.data
-            };
-          } else {
-            return project;
-          }
-        })
       };
 
     default:

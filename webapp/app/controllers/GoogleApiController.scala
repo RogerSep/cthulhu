@@ -25,8 +25,7 @@ class GoogleApiController @Inject() (
       val folder = service
         .files()
         .create(new File()
-          .setName(name)
-          .setMimeType(drive.Types.Files.Folder))
+          .setName(name))
         .setFields("id, name")
         .execute()
 
@@ -53,7 +52,7 @@ class GoogleApiController @Inject() (
 
   def list(projectId: Option[String]) = SecuredAction { request =>
     val email = request.identity.email.get
-    val query = s"('$email' in writers or '$email' in readers) and mimeType = '${drive.Types.Files.Folder}'" +
+    val query = s"('$email' in writers or '$email' in readers)" +
       projectId.map(id => s" and '$id' in parents").getOrElse("")
 
     val files = drive execute { service =>
