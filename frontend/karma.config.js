@@ -6,7 +6,8 @@ module.exports = function(config) {
     files: [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
       './node_modules/babel-polyfill/dist/polyfill.min.js',
-      'tests/**/*.spec.js'
+      'tests/**/*.spec.js',
+      'app/components/**/*.spec.js'
     ],
     plugins: [webpack, 'karma-mocha', 'karma-phantomjs-launcher', 'karma-coverage', 'karma-spec-reporter'],
     browsers: ['PhantomJS'],
@@ -26,6 +27,10 @@ module.exports = function(config) {
     webpack: {
       module: {
         loaders: [
+          {
+            test: /\.scss$/,
+            loader: 'null'
+          },
           {
             test: /\.js$/, exclude: /(bower_components|node_modules)/,
             loader: 'babel'

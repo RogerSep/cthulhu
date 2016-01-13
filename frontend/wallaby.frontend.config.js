@@ -2,9 +2,14 @@ var babel = require('babel-core');
 var wallabyWebpack = require('wallaby-webpack');
 
 var webpackPostprocessor = wallabyWebpack({
+  module: {
+    loaders: [
+      { test: /\.scss$/, loader: 'null' }
+    ]
+  }
 });
 
-module.exports = function (wallaby) {
+module.exports = function(wallaby) {
   var babelCompiler = wallaby.compilers.babel({
     babel: babel,
     presets: ['es2015', 'react', 'stage-0']
@@ -14,11 +19,14 @@ module.exports = function (wallaby) {
     files: [
       { pattern: 'node_modules/phantomjs-polyfill/bind-polyfill.js', instrument: false },
       { pattern: 'node_modules/babel-polyfill/dist/polyfill.min.js', instrument: false },
-      { pattern: 'app/**/*.js', load: false }
+      { pattern: 'app/**/*.js', load: false },
+      { pattern: 'app/components/**/*.spec.js', ignore: true },
+      'app/**/*.scss'
     ],
 
     tests: [
-      { pattern: 'tests/**/*.spec.js', load: false }
+      { pattern: 'tests/**/*.spec.js', load: false },
+      { pattern: 'app/components/**/*.spec.js', load: false }
     ],
 
     compilers: {
@@ -28,7 +36,7 @@ module.exports = function (wallaby) {
 
     postprocessor: webpackPostprocessor,
 
-    bootstrap: function () {
+    bootstrap: function() {
       window.__moduleBundler.loadTests();
     }
   };
