@@ -68,4 +68,18 @@ class GoogleApiController @Inject() (
     Ok(Json.toJson(files.map(file => Json.parse(file.toString))))
   }
 
+  def shareProject(project: String, email: String) = SecuredAction { request =>
+
+    drive.execute { service =>
+      val permission = new Permission()
+        .setEmailAddress(email)
+        .setType(drive.Types.Permission.User)
+        .setRole(drive.Types.Permission.Writer)
+
+      service.permissions().create(project, permission).execute()
+    }
+
+    Ok("shared")
+  }
+
 }
