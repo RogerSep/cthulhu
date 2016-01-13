@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 class Document extends React.Component {
-  constructor (props) {
+  static propTypes = {
+    params: PropTypes.object
+  };
+
+  constructor(props) {
     super(props);
   }
 
-  render () {
+  render() {
     return (
       <div>
         <textarea ref={ref => this._dom = ref} defaultValue="ola k ase"/>
@@ -13,8 +17,8 @@ class Document extends React.Component {
     );
   }
 
-  componentDidMount () {
-    const realtime = new utils.RealtimeUtils({clientId: '531838806517-k0n3hkar23fjc3ea1vhbtecvnkot9vua.apps.googleusercontent.com'});
+  componentDidMount() {
+    const realtime = new utils.RealtimeUtils({ clientId: '531838806517-k0n3hkar23fjc3ea1vhbtecvnkot9vua.apps.googleusercontent.com' });
     realtime.authorize(() => {
       realtime.load(this.props.params.projectId, doc => {
         const model = doc.getModel();
@@ -36,7 +40,7 @@ class Document extends React.Component {
         });
 
         gapi.drive.realtime.databinding.bindString(str, this._dom);
-      })
+      });
     });
   }
 }
