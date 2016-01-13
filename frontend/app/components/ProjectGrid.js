@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import fetchOnUpdate from '../decorators/fetchOnUpdate';
-import CollaborativeItem from './presentational/CollaborativeItem';
+import CollaborativeItem from './presentational/CollaborativeItem/CollaborativeItem';
 import CollaborativeItemCreator from './presentational/CollaborativeItemCreator';
 
 class ProjectGrid extends React.Component {

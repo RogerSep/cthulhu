@@ -38,7 +38,6 @@ export default (state = initialState, action) => {
         projects: [...state.projects, ...action.data]
       };
 
-          return project;
     default:
       return state;
   }
