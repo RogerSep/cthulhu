@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const DEFAULT_PORT = 3000;
 
@@ -13,7 +12,7 @@ const PATHS = {
 const common = {
   entry: PATHS.app,
   output: {
-    path : PATHS.build,
+    path: PATHS.build,
     filename: 'bundle.js',
     contentBase: 'http://localhost:9000',
     publicPath: `http://localhost:${DEFAULT_PORT}/assets/`
