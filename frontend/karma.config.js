@@ -1,4 +1,5 @@
-const webpack = require('karma-webpack');
+const karmaWebpack = require('karma-webpack');
+const webpack = require('webpack');
 
 module.exports = function(config) {
   config.set({
@@ -9,11 +10,11 @@ module.exports = function(config) {
       'tests/**/*.spec.js',
       'app/components/**/*.spec.js'
     ],
-    plugins: [webpack, 'karma-mocha', 'karma-phantomjs-launcher', 'karma-coverage', 'karma-spec-reporter'],
+    plugins: [karmaWebpack, 'karma-mocha', 'karma-phantomjs-launcher', 'karma-coverage', 'karma-spec-reporter'],
     browsers: ['PhantomJS'],
     preprocessors: {
       'tests/**/*.spec.js': ['webpack'],
-      'app/**/*.js': ['webpack']
+      'app/components/**/*.spec.js': ['webpack']
     },
     reporters: ['spec', 'coverage'],
     coverageReporter: {
@@ -26,6 +27,13 @@ module.exports = function(config) {
     },
     webpack: {
       module: {
+        preLoaders: [
+          {
+            test: /(\.jsx)|(\.js)$/,
+            exclude: /(tests|node_modules|bower_components)\//,
+            loader: 'isparta-instrumenter-loader'
+          }
+        ],
         loaders: [
           {
             test: /\.scss$/,
@@ -35,12 +43,11 @@ module.exports = function(config) {
             test: /\.js$/, exclude: /(bower_components|node_modules)/,
             loader: 'babel'
           }
-        ],
-        postLoaders: [{
-          test: /\.js$/, exclude: /(node_modules|bower_components|tests)/,
-          loader: 'istanbul-instrumenter'
-        }]
-      }
+        ]
+      },
+      plugins: [
+        new webpack.IgnorePlugin(/ReactContext/)
+      ]
     },
     webpackMiddleware: { noInfo: true }
   });
