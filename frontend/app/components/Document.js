@@ -6,23 +6,28 @@ class Document extends React.Component {
 
   static propTypes = {
     params: PropTypes.object,
-    actions: PropTypes.object
+    actions: PropTypes.object,
+    projects: PropTypes.object,
+    'projects.model': PropTypes.object
   };
 
   constructor(props) {
     super(props);
 
     const document = documentBindings(props.params.projectId);
+    const dataUpdates = document.skip(1).publish();
     this.subscription = document.subscribe(this);
+
+    dataUpdates.subscribe((doc, event) => {
+      this.props.actions.updateModel(JSON.parse(doc.getModel().toJson()));
+    });
   }
 
   render() {
     return (
-      <div>
-        <TableOfContents />
-        <Content content={JSON.stringify(this.props.projects.model, undefined, 4)} />
-        <textarea ref={ref => this._dom = ref} />
-      </div>
+        <Content
+          driveDocument={this.driveDocument}
+          model={this.props.projects.model} />
     );
   }
 
@@ -33,26 +38,8 @@ class Document extends React.Component {
   }
 
   onNext(document) {
-    const model = document.getModel();
-    const root = model.getRoot();
-
-    if (!root.get('example')) {
-      const str = model.createString();
-      root.set('example', str);
-    }
-
-    const str = root.get('example');
-    this.setState({});
-
-    gapi.drive.realtime.databinding.bindString(str, this._dom);
+    this.driveDocument = document;
     this.props.actions.updateModel(JSON.parse(document.getModel().toJson()));
-
-    console.log('document', document);
-
-    this.onNext = (document, e) => {
-      console.log(e);
-      this.props.actions.updateModel(JSON.parse(document.getModel().toJson()));
-    }
   }
 
   onError(error) {

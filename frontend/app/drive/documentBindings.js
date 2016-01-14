@@ -1,22 +1,27 @@
 import Realtime from './Realtime';
 import Rx from 'rx';
 
+const gapi = window.gapi;
+
 function documentBindings(documentId) {
-  return Rx.Observable.create((subscriber) => {
+  return Rx.Observable.create(subscriber => {
     let document = null;
 
+    const documentReady = doc => {
+      document = doc;
+
+      subscriber.onNext(doc);
+      console.log('document!', doc);
+
+      doc.getModel().getRoot().addEventListener(window.gapi.drive.realtime.EventType.OBJECT_CHANGED, e => {
+        subscriber.onNext(doc, e);
+      });
+    };
+
     Realtime.authorize(() => {
-      window.gapi.drive.realtime.load(
+      gapi.drive.realtime.load(
         documentId,
-        doc => {
-          document = doc;
-
-          subscriber.onNext(doc);
-
-          doc.getModel().getRoot().addEventListener(gapi.drive.realtime.EventType.OBJECT_CHANGED, e => {
-            subscriber.onNext(doc, e);
-          });
-        },
+        documentReady,
         doc => {},
         error => subscriber.onError(error)
       );
