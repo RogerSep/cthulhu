@@ -31,3 +31,8 @@ export const fetchItems = containerId => dispatch => {
     .then(json => dispatch({ type: ITEMS_FETCHED, data: json }));
 };
 
+export const ERROR = 'ERROR';
+export const error = err => ({ type: ERROR, error: err });
+
+export const UPDATE_MODEL = 'UDPATE_MODEL';
+export const updateModel = model => ({ type: UPDATE_MODEL, model });

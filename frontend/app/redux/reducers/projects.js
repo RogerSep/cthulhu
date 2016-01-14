@@ -4,7 +4,9 @@ import {
   PROJECT_CREATION,
   CREATE_PROJECT,
   ITEMS_FETCHED,
-  FETCH_ITEMS
+  FETCH_ITEMS,
+  ERROR,
+  UPDATE_MODEL
 } from '../actions/action-creators';
 
 const initialState = {
@@ -36,6 +38,18 @@ export default (state = initialState, action) => {
         ...state,
         isFetching: false,
         projects: [...state.projects, ...action.data]
+      };
+
+    case UPDATE_MODEL:
+      return {
+        ...state,
+        model: action.model
+      };
+
+    case ERROR:
+      return {
+        ...state,
+        error: action.error
       };
 
     default:

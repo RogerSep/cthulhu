@@ -1,43 +1,42 @@
 import React, { PropTypes } from 'react';
-import Realtime from '../drive/Realtime';
+import documentBindings from '../drive/documentBindings';
+import { TableOfContents, Content } from './projects';
 
 class Document extends React.Component {
 
   static propTypes = {
-    params: PropTypes.object
+    params: PropTypes.object,
+    actions: PropTypes.object
   };
 
   constructor(props) {
     super(props);
+
+    const document = documentBindings(props.params.projectId);
+    this.subscription = document.subscribe(this);
   }
 
   render() {
     return (
       <div>
-        <textarea/>
+        <TableOfContents />
+        <Content />
       </div>
     );
   }
 
-  componentDidMount() {
-    Realtime.authorize(() => {
-      Realtime.load(this.props.params.projectId, doc => {
-        const model = doc.getModel();
-        const root = model.getRoot();
-
-        console.log(`Document: ${this.props.params.projectId}`, doc, model, root);
-
-        this.setState({
-          doc, model, root
-        });
-      });
-    });
+  componentWillUnmount() {
+    if (this.subscription) {
+      this.subscription.dispose();
+    }
   }
 
-  componentWillUnmount() {
-    if (this.state.doc) {
-      this.state.doc.close();
-    }
+  onNext(document) {
+    this.props.actions.updateModel(JSON.parse(document.getModel().toJson()));
+  }
+
+  onError(error) {
+    this.props.actions.error(error);
   }
 }
 

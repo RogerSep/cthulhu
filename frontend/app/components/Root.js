@@ -6,7 +6,9 @@ import {
   fetchProjects,
   successProjects,
   createProject,
-  fetchItems
+  fetchItems,
+  updateModel,
+  error
 } from '../redux/actions/action-creators';
 
 import commonStyles from '../styles/_base.scss';
@@ -38,7 +40,9 @@ export default connect(
       fetchProjects,
       successProjects,
       createProject,
-      fetchItems
+      fetchItems,
+      updateModel,
+      error
     }, dispatch)
   })
 )(Root);
