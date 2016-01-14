@@ -12,6 +12,10 @@ function documentBindings(documentId) {
           document = doc;
 
           subscriber.onNext(doc);
+
+          doc.getModel().getRoot().addEventListener(gapi.drive.realtime.EventType.OBJECT_CHANGED, e => {
+            subscriber.onNext(doc, e);
+          });
         },
         doc => {},
         error => subscriber.onError(error)

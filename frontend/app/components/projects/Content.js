@@ -7,9 +7,9 @@ export default class Content extends React.Component {
 
   render() {
     return (
-      <div>
-        This is the content of the document.
-      </div>
+      <pre>
+        {this.props.content}
+      </pre>
     );
   }
 }
