@@ -21,13 +21,27 @@ class Document extends React.Component {
     dataUpdates.subscribe((doc, event) => {
       this.props.actions.updateModel(JSON.parse(doc.getModel().toJson()));
     });
+
+    this.bind = (objectId, textarea) => {
+      const collaborativeString = this.driveDocument.getModel().getRoot().get('sections').asArray().reduce((found, section) => {
+        if (section.getId() === objectId) {
+          return section.get('content');
+        }
+
+        return found;
+      }, null);
+
+      window.gapi.drive.realtime.databinding.bindString(collaborativeString, textarea);
+    };
   }
 
   render() {
     return (
         <Content
           driveDocument={this.driveDocument}
-          model={this.props.projects.model} />
+          actions={this.props.actions}
+          model={this.props.projects.model}
+          bind={this.bind} />
     );
   }
 

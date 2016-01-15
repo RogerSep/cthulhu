@@ -36,3 +36,9 @@ export const error = err => ({ type: ERROR, error: err });
 
 export const UPDATE_MODEL = 'UDPATE_MODEL';
 export const updateModel = model => ({ type: UPDATE_MODEL, model });
+
+export const EDIT_COLLABORATIVE_OBJECT = 'EDIT_COLLABORATIVE_OBJECT';
+export const editCollaborativeObject = objectId => ({ type: EDIT_COLLABORATIVE_OBJECT, objectId });
+
+export const FINISH_EDIT_COLLABORATIVE_OBJECT = 'FINISH_EDIT_COLLABORATIVE_OBJECT';
+export const finishEditCollaborativeObject = objectId => ({ type: FINISH_EDIT_COLLABORATIVE_OBJECT, objectId });

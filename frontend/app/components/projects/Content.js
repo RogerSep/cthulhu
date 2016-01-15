@@ -4,7 +4,9 @@ import ContentView from './ContentView';
 
 export default class Content extends React.Component {
   static propTypes = {
-    model: PropTypes.object
+    actions: PropTypes.object.isRequired,
+    model: PropTypes.object,
+    bind: PropTypes.func
   };
 
   constructor(props) {
@@ -12,44 +14,20 @@ export default class Content extends React.Component {
   }
 
   render() {
+    const props = this.props;
+
+    if (!props.model) {
+      return (
+        <div>Loading...</div>
+      );
+    }
+
     return (
       <div>
-        <TableOfContents content={this.computeTableOfContents()} />
-        <ContentView content={this.computeContent()} />
+        <TableOfContents content={props.model.tableOfContents} />
+        <ContentView content={props.model.contents} editing={props.model.editing}
+          actions={props.actions} bind={this.props.bind} />
       </div>
     );
-  }
-
-  computeTableOfContents() {
-    const model = this.props.model;
-
-    if (!model) {
-      return [];
-    }
-
-    return model.value.sections.value.map(section => {
-      const title = (/^# (.+)$/m).exec(section.value.content.value) || ['unnamed'];
-      return {
-        id: section.id,
-        title: title[0].replace('# ', ''),
-        order: section.value.order.json
-      };
-    }).sort((a, b) => a.order - b.order);
-  }
-
-  computeContent() {
-    const model = this.props.model;
-
-    if (!model) {
-      return [];
-    }
-
-    return model.value.sections.value.map(section => {
-      return {
-        id: section.id,
-        content: section.value.content.value,
-        order: section.value.order.json
-      };
-    }).sort((a, b) => a.order - b.order);
   }
 }

@@ -8,7 +8,9 @@ import {
   createProject,
   fetchItems,
   updateModel,
-  error
+  error,
+  editCollaborativeObject,
+  finishEditCollaborativeObject
 } from '../redux/actions/action-creators';
 
 import commonStyles from '../styles/_base.scss';
@@ -42,7 +44,9 @@ export default connect(
       createProject,
       fetchItems,
       updateModel,
-      error
+      error,
+      editCollaborativeObject,
+      finishEditCollaborativeObject
     }, dispatch)
   })
 )(Root);

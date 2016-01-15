@@ -6,8 +6,11 @@ import {
   ITEMS_FETCHED,
   FETCH_ITEMS,
   ERROR,
-  UPDATE_MODEL
+  UPDATE_MODEL,
+  EDIT_COLLABORATIVE_OBJECT,
+  FINISH_EDIT_COLLABORATIVE_OBJECT
 } from '../actions/action-creators';
+import modelConversions from '../../drive/modelConversions';
 
 const initialState = {
   isFetching: false,
@@ -41,9 +44,32 @@ export default (state = initialState, action) => {
       };
 
     case UPDATE_MODEL:
+      const model = modelConversions(action.model);
+      const { editing } = state.model || { editing: [] };
       return {
         ...state,
-        model: action.model
+        model: {
+          ...model,
+          editing
+        }
+      };
+
+    case EDIT_COLLABORATIVE_OBJECT:
+      return {
+        ...state,
+        model: {
+          ...state.model,
+          editing: state.model.editing.filter(id => id !== action.objectId).concat(action.objectId)
+        }
+      };
+
+    case FINISH_EDIT_COLLABORATIVE_OBJECT:
+      return {
+        ...state,
+        model: {
+          ...state.model,
+          editing: state.model.editing.filter(id => id !== action.objectId)
+        }
       };
 
     case ERROR:

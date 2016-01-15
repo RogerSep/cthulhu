@@ -11,7 +11,6 @@ function documentBindings(documentId) {
       document = doc;
 
       subscriber.onNext(doc);
-      console.log('document!', doc);
 
       doc.getModel().getRoot().addEventListener(window.gapi.drive.realtime.EventType.OBJECT_CHANGED, e => {
         subscriber.onNext(doc, e);
