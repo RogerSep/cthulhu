@@ -1,12 +1,17 @@
 import React, { PropTypes } from 'react';
 
+import remark from 'remark';
+import reactRenderer from 'remark-react';
+
 export default class ContentView extends React.Component {
   static propTypes = {
-    content: PropTypes.object
+    content: PropTypes.array
   };
 
   constructor(props) {
     super(props);
+
+    this.markdownProcessor = remark().use(reactRenderer);
   }
 
   render() {
@@ -14,9 +19,9 @@ export default class ContentView extends React.Component {
       <div>
         {this.props.content.map(section => {
           return (
-            <pre>
-              {JSON.stringify(section)}
-            </pre>
+            <div key={section.id}>
+              {this.markdownProcessor.process(section.content)}
+            </div>
           );
         })}
       </div>

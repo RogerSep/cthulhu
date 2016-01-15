@@ -16,9 +16,6 @@ export default class Content extends React.Component {
       <div>
         <TableOfContents content={this.computeTableOfContents()} />
         <ContentView content={this.computeContent()} />
-        <pre>
-          {JSON.stringify(this.props.model, null, 4)}
-        </pre>
       </div>
     );
   }

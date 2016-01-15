@@ -19,9 +19,6 @@ export default class TableOfContents extends React.Component {
             );
           })}
         </ul>
-        <pre>
-          {JSON.stringify(this.props.content)}
-        </pre>
       </div>
     );
   }

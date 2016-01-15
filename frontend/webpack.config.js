@@ -41,6 +41,10 @@ const common = {
         // loader: ExtractTextPlugin.extract('style', 'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader?sourceMap'),
         loader: 'style-loader!css-loader?sourceMap&modules!sass-loader?sourceMap',
         include: PATHS.app
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   }
