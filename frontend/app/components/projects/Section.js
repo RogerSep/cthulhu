@@ -30,7 +30,7 @@ export default class Section extends React.Component {
             }
           }}
           ref={ref => {
-            //binding = this.props.bind(this.props.content.id, ref);
+            binding = this.props.bind(this.props.content.id, ref);
           }}/>
       );
     }
@@ -43,12 +43,7 @@ export default class Section extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (nextProps.content.id === 't7CRdg4XQvij') {
-      const shouldUpdate = (this.props.editing || nextProps.editing) && !(this.props.editing && nextProps.editing);
-      console.log(this.props.editing, nextProps.editing, ' => ', shouldUpdate);
-    }
-
-    return (this.props.editing || nextProps.editing) && !(this.props.editing && nextProps.editing);
+    return (this.props.editing || nextProps.editing) && !(this.props.editing && nextProps.editing) || (!this.props.editing && this.props.content.content !== nextProps.content.content);
   }
 
 }
