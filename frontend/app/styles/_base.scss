@@ -2,7 +2,11 @@ html {
   font-family: 'Open Sans', sans-serif;
 }
 
-pre {
-  color: #666;
-  font-size: 8pt;
+body {
+  padding: 20px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 150px;
 }
