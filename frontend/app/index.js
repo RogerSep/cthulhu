@@ -10,8 +10,6 @@ import createLogger from 'redux-logger';
 import { Root, ProjectGrid, Document } from './components';
 import reducers from './redux/reducers/reducers';
 
-console.log(browserHistory);
-
 const reduxRouterMiddleware = syncHistory(browserHistory);
 const reducer = combineReducers(Object.assign({}, reducers, {
   routing: routeReducer

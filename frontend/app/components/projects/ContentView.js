@@ -33,7 +33,7 @@ export default class ContentView extends Component {
         actions={props.actions}
         bind={props.bind}
         editing={props.editing.some(id => id === section.id)}
-        markdownProcessor={this.markdownProcessor} />
+        markdownProcessor={markdownProcessor} />
     );
   };
 
