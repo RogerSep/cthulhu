@@ -1,6 +1,14 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
 html {
-  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
 
 textarea {
   width: 100%;
