@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import css from './_content.scss';
 
 export default class TableOfContents extends React.Component {
   static propTypes = {
@@ -11,7 +12,7 @@ export default class TableOfContents extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={css.table}>
         <ul>
           {this.props.content.map(section => {
             return (

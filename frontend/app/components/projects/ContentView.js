@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import remark from 'remark';
 import reactRenderer from 'remark-react';
 import Section from './Section';
+import css from './_content.scss';
 
 export default class ContentView extends React.Component {
   static propTypes = {
@@ -19,7 +20,7 @@ export default class ContentView extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={css.sections}>
         {this.props.content.map(section => this.renderSection(section, this.props, this.markdownProcessor))}
       </div>
     );

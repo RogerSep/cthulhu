@@ -26,7 +26,7 @@ export default class Section extends React.Component {
           onBlur={() => {
             this.props.actions.finishEditCollaborativeObject(this.props.content.id);
             if (binding) {
-              console.log(binding);
+              console.log('binding: ', binding);
             }
           }}
           ref={ref => {
@@ -43,17 +43,10 @@ export default class Section extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return (this.props.editing || nextProps.editing) && !(this.props.editing && nextProps.editing) || (!this.props.editing && this.props.content.content !== nextProps.content.content);
+    const editFlagToggled = (this.props.editing || nextProps.editing) && !(this.props.editing && nextProps.editing);
+    const contentChanged = !this.props.editing && this.props.content.content !== nextProps.content.content;
+
+    return editFlagToggled || contentChanged;
   }
 
 }
-
-/**
-
-  this.props.editing n
-  f f f
-  f t t
-  t f t
-  t t f
-
-*/

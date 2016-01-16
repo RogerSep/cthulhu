@@ -3,7 +3,7 @@ export default function convert(driveModel) {
     const title = (/^#+ .+$/m).exec(section.value.content.value) || ['unnamed'];
     return {
       id: section.id,
-      title: title[0].replace('# ', ''),
+      title: title[0].replace(/^#+ /, ''),
       order: section.value.order.json
     };
   }).sort((a, b) => a.order - b.order);

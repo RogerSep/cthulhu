@@ -13,7 +13,8 @@ import reducers from './redux/reducers/reducers';
 
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware,
-  //createLogger()
+
+  // createLogger()
 )(createStore);
 
 const reducer = combineReducers(Object.assign({}, reducers, {

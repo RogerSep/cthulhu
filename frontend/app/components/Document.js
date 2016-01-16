@@ -32,7 +32,7 @@ class Document extends React.Component {
       }, null);
 
       if (textarea) {
-        window.gapi.drive.realtime.databinding.bindString(collaborativeString, textarea);
+        return window.gapi.drive.realtime.databinding.bindString(collaborativeString, textarea);
       }
     };
   }
