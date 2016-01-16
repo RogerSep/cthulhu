@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import css from './CollaborativeItem.scss';
 
-class CollaborativeItem extends React.Component {
+class CollaborativeItem extends Component {
   static propTypes = {
     link: PropTypes.string,
     name: PropTypes.string

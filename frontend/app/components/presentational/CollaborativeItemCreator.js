@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-class CollaborativeItemCreator extends React.Component {
+class CollaborativeItemCreator extends Component {
   static propTypes = {
     create: PropTypes.func.isRequired
   };

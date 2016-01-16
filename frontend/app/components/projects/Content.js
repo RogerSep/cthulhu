@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import TableOfContents from './TableOfContents';
 import ContentView from './ContentView';
 import css from './_content.scss';
 
-export default class Content extends React.Component {
+export default class Content extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     model: PropTypes.object,

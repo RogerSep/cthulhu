@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import shallowEqual from 'react-redux/lib/utils/shallowEqual';
 
 function mapParams(paramKeys, params) {
@@ -12,7 +12,7 @@ function mapParams(paramKeys, params) {
 
 export default function fetchOnUpdate(paramKeys, fn) {
   return DecoratedComponent =>
-    class FetchOnUpdateDecorator extends React.Component {
+    class FetchOnUpdateDecorator extends Component {
       static displayName = 'FetchOnUpdateDecorator';
 
       static propTypes = {

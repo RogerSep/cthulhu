@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import remark from 'remark';
 import reactRenderer from 'remark-react';
 import Section from './Section';
 import css from './_content.scss';
 
-export default class ContentView extends React.Component {
+export default class ContentView extends Component {
   static propTypes = {
     content: PropTypes.array,
     editing: PropTypes.array,

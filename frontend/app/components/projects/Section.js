@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class Section extends React.Component {
+export default class Section extends Component {
 
   static propTypes = {
     content: PropTypes.object,

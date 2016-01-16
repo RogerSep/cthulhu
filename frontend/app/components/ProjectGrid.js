@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import fetchOnUpdate from '../decorators/fetchOnUpdate';
 import CollaborativeItem from './presentational/CollaborativeItem/CollaborativeItem';
 import CollaborativeItemCreator from './presentational/CollaborativeItemCreator';
 
-class ProjectGrid extends React.Component {
+class ProjectGrid extends Component {
   static propTypes = {
     projects: PropTypes.object,
     actions: PropTypes.object

@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import documentBindings from '../drive/documentBindings';
 import { TableOfContents, Content } from './projects';
 
-class Document extends React.Component {
+class Document extends Component {
 
   static propTypes = {
     params: PropTypes.object,

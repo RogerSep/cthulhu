@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import css from './_content.scss';
 
-export default class TableOfContents extends React.Component {
+export default class TableOfContents extends Component {
   static propTypes = {
     content: PropTypes.array
   };

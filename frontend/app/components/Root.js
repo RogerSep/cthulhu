@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { pushPath } from 'redux-simple-router';
 import { bindActionCreators } from 'redux';
@@ -15,7 +15,7 @@ import {
 
 import commonStyles from '../styles/_base.scss';
 
-class Root extends React.Component {
+class Root extends Component {
   static propTypes = {
     children: PropTypes.object
   };
