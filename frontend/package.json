@@ -62,7 +62,7 @@
     "react-dnd-html5-backend": "^2.0.2",
     "react-dom": "^0.14.6",
     "react-redux": "^4.0.6",
-    "react-router": "^1.0.3",
+    "react-router": "^2.0.0-rc5",
     "redux": "^3.0.5",
     "redux-router": "^0.1.0",
     "redux-simple-router": "^2.0.3",
