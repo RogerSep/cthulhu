@@ -1,14 +1,41 @@
-/* apply a natural box layout model to all elements, but allowing components to change */
+/*======================================*
+    BOX MODEL RESET
+    apply a natural box layout model to all elements, but allowing components to
+    change
+ *======================================*/
+
 html {
   box-sizing: border-box;
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
 
+
+/*======================================*
+    VARIABLES
+ *======================================*/
+
+$main-font: 'Open Sans';
+$header-font: '';
+$coding-font: 'Inconsolata';
+$main-font-stack: $main-font, Helvetica, Arial, sans-serif;
+$coding-font-stack: $coding-font, 'monospace';
+
+
+
+/*======================================*
+    BASE STYLES
+ *======================================*/
+
+html {
+  font-family: $main-font-stack;
+}
+
 textarea {
-  width: 100%;
+  font-family: $coding-font-stack;
   min-height: 150px;
+  width: 100%;
 }
