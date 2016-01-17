@@ -1,3 +1,9 @@
+@import '../../styles/_base';
+
+pre, code {
+  font-family: $coding-font-stack;
+}
+
 .content {
   display: flex;
 
