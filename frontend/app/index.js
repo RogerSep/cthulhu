@@ -32,9 +32,11 @@ window.gapi.load('auth:client,drive-realtime');
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={Root}>
+      <Route path="/"
+             component={Root}>
         <IndexRoute component={ProjectGrid} />
-        <Route path="projects/:projectId" component={DriveDocument} />
+        <Route path="projects/:projectId"
+               component={DriveDocument} />
       </Route>
     </Router>
   </Provider>,
