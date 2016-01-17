@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import css from './_markdown.scss';
 
 export default class Section extends Component {
 
@@ -15,7 +16,8 @@ export default class Section extends Component {
     let sectionRender;
     if (!this.props.editing && this.props.content.content.length >= 0) {
       sectionRender = (
-        <div onClick={() => this.props.actions.editCollaborativeObject(this.props.content.id)}>
+        <div
+          onClick={() => this.props.actions.editCollaborativeObject(this.props.content.id)}>
           {this.props.markdownProcessor.process(this.props.content.content)}
         </div>
       );
@@ -26,7 +28,7 @@ export default class Section extends Component {
           onBlur={() => {
             this.props.actions.finishEditCollaborativeObject(this.props.content.id);
             if (binding) {
-              console.log('binding: ', binding);
+              binding.unbind();
             }
           }}
           ref={ref => {
@@ -36,7 +38,7 @@ export default class Section extends Component {
     }
 
     return (
-      <div>
+      <div className={css.markdownContainer}>
         {sectionRender}
       </div>
     );
