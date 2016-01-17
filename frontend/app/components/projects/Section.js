@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import css from './_markdown.scss';
+import CSSModules from 'react-css-modules';
+import styles from './_markdown.scss';
 
 export default class Section extends Component {
 
@@ -10,7 +11,6 @@ export default class Section extends Component {
     editing: PropTypes.bool,
     markdownProcessor: PropTypes.object
   };
-
 
   render() {
     let sectionRender;
@@ -24,21 +24,21 @@ export default class Section extends Component {
     } else {
       let binding;
       sectionRender = (
-        <textarea autoFocus={true} defaultValue={this.props.content.content}
-          onBlur={() => {
-            this.props.actions.finishEditCollaborativeObject(this.props.content.id);
-            if (binding) {
-              binding.unbind();
-            }
-          }}
-          ref={ref => {
-            binding = this.props.bind(this.props.content.id, ref);
-          }}/>
+        <textarea styleName='edit-box'
+                  autoFocus={true}
+                  defaultValue={this.props.content.content}
+                  onBlur={() => {
+                    this.props.actions.finishEditCollaborativeObject(this.props.content.id);
+                    if (binding) {
+                      binding.unbind();
+                    }
+                  }}
+                  ref={ref => binding = this.props.bind(this.props.content.id, ref)} />
       );
     }
 
     return (
-      <div className={css.markdownContainer}>
+      <div styleName='md-container'>
         {sectionRender}
       </div>
     );
@@ -52,3 +52,5 @@ export default class Section extends Component {
   }
 
 }
+
+export default CSSModules(Section, styles);

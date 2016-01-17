@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import TableOfContents from './TableOfContents';
 import ContentView from './ContentView';
-import css from './_content.scss';
+import CSSModules from 'react-css-modules';
+import styles from './_content.scss';
 
 export default class Content extends Component {
   static propTypes = {
@@ -24,11 +25,15 @@ export default class Content extends Component {
     }
 
     return (
-      <div className={css.content}>
+      <div styleName='content'>
         <TableOfContents content={props.model.tableOfContents} />
-        <ContentView content={props.model.contents} editing={props.model.editing}
-          actions={props.actions} bind={this.props.bind} />
+        <ContentView content={props.model.contents}
+                     editing={props.model.editing}
+                     actions={props.actions}
+                     bind={this.props.bind} />
       </div>
     );
   }
 }
+
+export default CSSModules(Content, styles);
