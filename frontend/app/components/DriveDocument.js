@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import documentBindings from '../drive/documentBindings';
-import { TableOfContents, Content } from './projects';
+import TableOfContents from './projects/TableOfContents';
+import Content from './projects/Content';
 
-class Document extends Component {
+class DriveDocument extends Component {
 
   static propTypes = {
     params: PropTypes.object,
@@ -63,4 +64,4 @@ class Document extends Component {
   }
 }
 
-export default Document;
+export default DriveDocument;
