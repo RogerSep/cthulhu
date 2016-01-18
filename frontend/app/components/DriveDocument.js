@@ -22,29 +22,14 @@ class DriveDocument extends Component {
     dataUpdates.subscribe((doc, event) => {
       this.props.actions.updateModel(JSON.parse(doc.getModel().toJson()));
     });
-
-    this.bind = (objectId, textarea) => {
-      const collaborativeString = this.driveDocument.getModel().getRoot().get('sections').asArray().reduce((found, section) => {
-        if (section.getId() === objectId) {
-          return section.get('content');
-        }
-
-        return found;
-      }, null);
-
-      if (textarea) {
-        return window.gapi.drive.realtime.databinding.bindString(collaborativeString, textarea);
-      }
-    };
   }
 
   render() {
     return (
         <Content
-          driveDocument={this.driveDocument}
+          drive={this.drive}
           actions={this.props.actions}
-          model={this.props.projects.model}
-          bind={this.bind} />
+          model={this.props.projects.model} />
     );
   }
 
@@ -62,6 +47,30 @@ class DriveDocument extends Component {
   onError(error) {
     this.props.actions.error(error);
   }
+
+  drive = {
+    bindString: (objectId, textarea) => {
+      const collaborativeString = this.driveDocument.getModel().getRoot().get('sections').asArray().reduce((found, section) => {
+        if (section.containsCollaborativeString(objectId)) {
+          return section.content;
+        }
+
+        return found;
+      }, null);
+
+      if (!!collaborativeString && !!textarea) {
+        return window.gapi.drive.realtime.databinding.bindString(collaborativeString, textarea);
+      }
+    },
+    addSection: () => {
+      const model = this.driveDocument.getModel();
+      const root = model.getRoot();
+
+      const section = model.create('TextSection');
+      section.order = 0;
+      root.get('sections').push(section);
+    }
+  };
 }
 
 export default DriveDocument;

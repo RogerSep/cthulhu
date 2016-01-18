@@ -10,7 +10,7 @@ export default function convert(driveModel) {
 
   const contents = driveModel.value.sections.value.map(section => {
     return {
-      id: section.id,
+      id: section.value.content.id,
       content: section.value.content.value,
       order: section.value.order.json
     };

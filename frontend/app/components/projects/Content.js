@@ -8,7 +8,8 @@ export default class Content extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     model: PropTypes.object,
-    bind: PropTypes.func
+    bind: PropTypes.func,
+    drive: PropTypes.object
   };
 
   constructor(props) {
@@ -30,7 +31,7 @@ export default class Content extends Component {
         <ContentView content={props.model.contents}
                      editing={props.model.editing}
                      actions={props.actions}
-                     bind={this.props.bind} />
+                     drive={this.props.drive} />
       </div>
     );
   }

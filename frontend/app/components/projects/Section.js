@@ -7,18 +7,17 @@ export default class Section extends Component {
   static propTypes = {
     content: PropTypes.object,
     actions: PropTypes.object,
-    bind: PropTypes.func,
+    drive: PropTypes.object,
     editing: PropTypes.bool,
     markdownProcessor: PropTypes.object
   };
 
   render() {
     let sectionRender;
-    if (!this.props.editing && this.props.content.content.length >= 0) {
+    if (!this.props.editing) {
       sectionRender = (
-        <div
-          onClick={() => this.props.actions.editCollaborativeObject(this.props.content.id)}>
-          {this.props.markdownProcessor.process(this.props.content.content)}
+        <div styleName='md-container'>
+          {this.props.markdownProcessor.process(this.props.content.content || '*Click to add content*')}
         </div>
       );
     } else {
@@ -33,12 +32,15 @@ export default class Section extends Component {
                       binding.unbind();
                     }
                   }}
-                  ref={ref => binding = this.props.bind(this.props.content.id, ref)} />
+                  ref={ref => {
+                    binding = this.props.drive.bindString(this.props.content.id, ref);
+                  }} />
       );
     }
 
     return (
-      <div styleName='md-container'>
+      <div styleName='document-section'
+        onClick={() => this.props.actions.editCollaborativeObject(this.props.content.id)}>
         {sectionRender}
       </div>
     );

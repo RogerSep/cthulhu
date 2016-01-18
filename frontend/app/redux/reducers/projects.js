@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
     return {
       ...state,
       isFetching: false,
-      projects: [...state.projects, ...action.data]
+      projects: state.projects.concat(action.data)
     };
 
   case UPDATE_MODEL:

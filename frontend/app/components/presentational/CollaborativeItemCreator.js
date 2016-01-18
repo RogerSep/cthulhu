@@ -7,6 +7,8 @@ class CollaborativeItemCreator extends Component {
 
   constructor(props) {
     super(props);
+
+    this.create = this.create.bind(this);
   }
 
   render() {

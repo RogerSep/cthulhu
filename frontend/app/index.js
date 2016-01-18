@@ -11,6 +11,7 @@ import Root from './components/Root';
 import ProjectGrid from './components/ProjectGrid';
 import DriveDocument from './components/DriveDocument';
 import reducers from './redux/reducers/reducers';
+import driveInitialize from './drive';
 
 const reduxRouterMiddleware = syncHistory(browserHistory);
 const reducer = combineReducers(Object.assign({}, reducers, {
@@ -19,7 +20,8 @@ const reducer = combineReducers(Object.assign({}, reducers, {
 
 const createStoreWithMiddleware = applyMiddleware(
   reduxRouterMiddleware,
-  thunkMiddleware// , createLogger()
+  thunkMiddleware,
+  createLogger()
 )(createStore);
 
 const store = createStoreWithMiddleware(reducer);
@@ -27,7 +29,7 @@ const store = createStoreWithMiddleware(reducer);
 const app = document.createElement('div');
 document.body.appendChild(app);
 
-window.gapi.load('auth:client,drive-realtime');
+driveInitialize();
 
 render(
   <Provider store={store}>

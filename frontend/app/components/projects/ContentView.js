@@ -9,7 +9,7 @@ export default class ContentView extends Component {
     content: PropTypes.array,
     editing: PropTypes.array,
     actions: PropTypes.object.isRequired,
-    bind: PropTypes.func
+    drive: PropTypes.object
   };
 
   constructor(props) {
@@ -22,6 +22,7 @@ export default class ContentView extends Component {
     return (
       <div className={css.sections}>
         {this.props.content.map(section => this.renderSection(section, this.props, this.markdownProcessor))}
+        <button onClick={() => this.props.drive.addSection()}>Add section</button>
       </div>
     );
   }
@@ -31,7 +32,7 @@ export default class ContentView extends Component {
       <Section key={section.id}
         content={section}
         actions={props.actions}
-        bind={props.bind}
+        drive={props.drive}
         editing={props.editing.some(id => id === section.id)}
         markdownProcessor={markdownProcessor} />
     );
