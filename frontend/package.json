@@ -46,7 +46,7 @@
     "react-transform-hmr": "^1.0.1",
     "redux-logger": "^2.3.2",
     "sass-loader": "^3.1.2",
-    "sinon": "^1.17.2",
+    "sinon": "git+https://github.com/sinonjs/sinon.git",
     "skin-deep": "^0.13.2",
     "style-loader": "^0.13.0",
     "wallaby-webpack": "0.0.11",
