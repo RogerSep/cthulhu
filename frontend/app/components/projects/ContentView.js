@@ -22,8 +22,10 @@ export default class ContentView extends Component {
   render() {
     return (
       <div className="col-sm-8 col-md-9">
-        {this.props.content.map(section => this.renderSection(section, this.props, this.markdownProcessor))}
-        <button onClick={() => this.props.drive.addSection()}>Add section</button>
+        <div styleName="sections">
+          {this.props.content.map(section => this.renderSection(section, this.props, this.markdownProcessor))}
+          <button onClick={() => this.props.drive.addSection()}>Add section</button>
+        </div>
       </div>
     );
   }

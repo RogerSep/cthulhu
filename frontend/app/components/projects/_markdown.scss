@@ -1,7 +1,18 @@
 @import '../../styles/_base';
 
 .document-section {
-  border: 1px black solid;
+  position: relative;
+
+  .control-panel {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+  }
+
+  &:hover .control-panel {
+    display: block;
+  }
 }
 
 .md-container {
