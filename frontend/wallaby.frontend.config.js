@@ -1,4 +1,5 @@
 var babel = require('babel-core');
+var webpack = require('webpack');
 var wallabyWebpack = require('wallaby-webpack');
 
 var webpackPostprocessor = wallabyWebpack({
@@ -6,7 +7,10 @@ var webpackPostprocessor = wallabyWebpack({
     loaders: [
       { test: /\.scss$/, loader: 'null' }
     ]
-  }
+  },
+  plugins: [
+    new webpack.IgnorePlugin(/ReactContext/)
+  ]
 });
 
 module.exports = function(wallaby) {
