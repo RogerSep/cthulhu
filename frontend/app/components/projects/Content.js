@@ -26,7 +26,7 @@ export default class Content extends Component {
     }
 
     return (
-      <div styleName='content'>
+      <div className='row'>
         <TableOfContents content={props.model.tableOfContents} />
         <ContentView content={props.model.contents}
                      editing={props.model.editing}

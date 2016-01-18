@@ -16,7 +16,7 @@ export default class Section extends Component {
     let sectionRender;
     if (!this.props.editing) {
       sectionRender = (
-        <div styleName='md-container'>
+        <div>
           {this.props.markdownProcessor.process(this.props.content.content || '*Click to add content*')}
         </div>
       );

@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import remark from 'remark';
 import reactRenderer from 'remark-react';
 import Section from './Section';
-import css from './_content.scss';
+import CSSModules from 'react-css-modules';
+import styles from './_content.scss';
 
 export default class ContentView extends Component {
   static propTypes = {
@@ -20,7 +21,7 @@ export default class ContentView extends Component {
 
   render() {
     return (
-      <div className={css.sections}>
+      <div className="col-sm-8 col-md-9">
         {this.props.content.map(section => this.renderSection(section, this.props, this.markdownProcessor))}
         <button onClick={() => this.props.drive.addSection()}>Add section</button>
       </div>
@@ -39,3 +40,5 @@ export default class ContentView extends Component {
   };
 
 }
+
+export default CSSModules(ContentView, styles);

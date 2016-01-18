@@ -3,16 +3,3 @@
 pre, code {
   font-family: $coding-font-stack;
 }
-
-.content {
-  display: flex;
-
-  .table {
-    background-color: #ddd;
-    min-width: 20%;
-  }
-
-  .sections {
-    padding: 0 30px;
-  }
-}
