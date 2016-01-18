@@ -2,7 +2,7 @@ import getJSON from '../../app/utils/getJSON';
 import { expect } from 'chai';
 import { fakeServer } from 'sinon/lib/sinon';
 
-const jsonOptions = { "Content-Type": "application/json" };
+const jsonOptions = { 'Content-Type': 'application/json' };
 
 let server;
 
