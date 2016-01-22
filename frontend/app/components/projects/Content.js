@@ -9,7 +9,8 @@ export default class Content extends Component {
     actions: PropTypes.object.isRequired,
     model: PropTypes.object,
     bind: PropTypes.func,
-    drive: PropTypes.object
+    drive: PropTypes.object,
+    path: PropTypes.object
   };
 
   constructor(props) {
@@ -27,11 +28,16 @@ export default class Content extends Component {
 
     return (
       <div className='row'>
-        <TableOfContents content={props.model.tableOfContents} />
-        <ContentView content={props.model.contents}
-                     editing={props.model.editing}
-                     actions={props.actions}
-                     drive={this.props.drive} />
+        <TableOfContents
+          content={props.model.tableOfContents}
+          drive={this.props.drive}
+          path={this.props.path} />
+        <ContentView
+          content={props.model.contents}
+          editing={props.model.editing}
+          actions={props.actions}
+          drive={this.props.drive}
+          path={this.props.path} />
       </div>
     );
   }

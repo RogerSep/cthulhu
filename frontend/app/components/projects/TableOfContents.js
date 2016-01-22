@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './_content.scss';
+import { Link } from 'react-router';
 
 export default class TableOfContents extends Component {
   static propTypes = {
-    content: PropTypes.array
+    drive: PropTypes.object,
+    content: PropTypes.array,
+    path: PropTypes.object
   };
 
   constructor(props) {
@@ -17,9 +20,12 @@ export default class TableOfContents extends Component {
         <ul>
           {this.props.content.map(section => {
             return (
-              <li key={section.id}>{section.title}</li>
+              <li key={section.id}>
+                <Link to={`${this.props.path.project}/${section.id}`}>{section.title}</Link>
+              </li>
             );
           })}
+          <li><button onClick={() => this.props.drive.addSection()}>Add section</button></li>
         </ul>
       </div>
     );

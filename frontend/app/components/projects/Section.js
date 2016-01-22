@@ -41,7 +41,8 @@ export default class Section extends Component {
     return (
       <div styleName='document-section'>
         <div styleName="control-panel">
-          <i className="fa fa-pencil" onClick={() => this.props.actions.editCollaborativeObject(this.props.content.id)}></i>
+          <i className="fa fa-pencil"
+            onClick={() => this.props.actions.editCollaborativeObject(this.props.content.id)}></i>
           <i className="fa fa-trash"></i>
         </div>
         {sectionRender}

@@ -37,7 +37,7 @@ render(
       <Route path="/"
              component={Root}>
         <IndexRoute component={ProjectGrid} />
-        <Route path="projects/:projectId"
+        <Route path="projects/:projectId(/**)"
                component={DriveDocument} />
       </Route>
     </Router>

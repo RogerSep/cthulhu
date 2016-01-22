@@ -25,11 +25,18 @@ class DriveDocument extends Component {
   }
 
   render() {
+    const section = (this.props.params.splat || '/').split('/')[0];
+    const path = `/projects/${this.props.params.projectId}${(section && '/') + section}`;
+
     return (
         <Content
           drive={this.drive}
           actions={this.props.actions}
-          model={this.props.projects.model} />
+          model={this.props.projects.model}
+          path={({
+            project: `/projects/${this.props.params.projectId}`,
+            active: path
+          })} />
     );
   }
 
@@ -42,6 +49,15 @@ class DriveDocument extends Component {
   onNext(document) {
     this.driveDocument = document;
     this.props.actions.updateModel(JSON.parse(document.getModel().toJson()));
+
+    if (!this.props.params.splat) {
+      const firstSection = document.getModel().getRoot()
+        .get('sections')
+        .asArray()
+        .filter(section => section.get('parent') === '' && section.get('order') === 0)
+        .reduce((_, section) => section.getId(), '');
+      this.props.actions.router.replace('/projects/' + this.props.params.projectId + '/' + firstSection);
+    }
   }
 
   onError(error) {
@@ -51,8 +67,8 @@ class DriveDocument extends Component {
   drive = {
     bindString: (objectId, textarea) => {
       const collaborativeString = this.driveDocument.getModel().getRoot().get('sections').asArray().reduce((found, section) => {
-        if (section.containsCollaborativeString(objectId)) {
-          return section.content;
+        if (section.get('content').getId() === objectId) {
+          return section.get('content');
         }
 
         return found;
@@ -62,12 +78,16 @@ class DriveDocument extends Component {
         return window.gapi.drive.realtime.databinding.bindString(collaborativeString, textarea);
       }
     },
-    addSection: () => {
+    addSection: (parentId = '') => {
       const model = this.driveDocument.getModel();
       const root = model.getRoot();
 
-      const section = model.create('TextSection');
-      section.order = 0;
+      const section = model.createMap();
+      section.set('type', 'text');
+      section.set('order', root.get('sections').length);
+      section.set('parent', parentId);
+      section.set('content', model.createString());
+
       root.get('sections').push(section);
     }
   };

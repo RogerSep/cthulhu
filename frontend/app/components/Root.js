@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { pushPath } from 'redux-simple-router';
+import { routeActions } from 'redux-simple-router';
 import { bindActionCreators } from 'redux';
 import {
   fetchProjects,
@@ -37,8 +37,8 @@ export default connect(
   state => ({
     projects: state.projects
   }),
-  dispatch => ({
-    actions: bindActionCreators({
+  dispatch => {
+    const actions = bindActionCreators({
       fetchProjects,
       successProjects,
       createProject,
@@ -47,6 +47,12 @@ export default connect(
       error,
       editCollaborativeObject,
       finishEditCollaborativeObject
-    }, dispatch)
-  })
+    }, dispatch);
+
+    return {
+      actions: Object.assign(actions, {
+        router: bindActionCreators({ ...routeActions }, dispatch)
+      })
+    };
+  }
 )(Root);
