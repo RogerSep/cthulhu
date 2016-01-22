@@ -24,17 +24,17 @@ export default class Section extends Component {
       let binding;
       sectionRender = (
         <textarea styleName='edit-box'
-                  autoFocus={true}
-                  defaultValue={this.props.content.content}
-                  onBlur={() => {
-                    this.props.actions.finishEditCollaborativeObject(this.props.content.id);
-                    if (binding) {
-                      binding.unbind();
-                    }
-                  }}
-                  ref={ref => {
-                    binding = this.props.drive.bindString(this.props.content.id, ref);
-                  }} />
+          autoFocus={true}
+          defaultValue={this.props.content.content}
+          onBlur={() => {
+            this.props.actions.finishEditCollaborativeObject(this.props.content.id);
+            if (binding) {
+              binding.unbind();
+            }
+          }}
+          ref={ref => {
+            binding = this.props.drive.bindString(this.props.content.id, ref);
+          }} />
       );
     }
 
@@ -52,9 +52,9 @@ export default class Section extends Component {
 
   shouldComponentUpdate(nextProps) {
     const editFlagToggled = (this.props.editing || nextProps.editing) && !(this.props.editing && nextProps.editing);
-    const contentChanged = !this.props.editing && this.props.content.content !== nextProps.content.content;
+    const contentChangedWhileVisualizing = !this.props.editing && this.props.content.content !== nextProps.content.content;
 
-    return editFlagToggled || contentChanged;
+    return editFlagToggled || contentChangedWhileVisualizing;
   }
 
 }

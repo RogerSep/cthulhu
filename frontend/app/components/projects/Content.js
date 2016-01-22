@@ -26,6 +26,9 @@ export default class Content extends Component {
       );
     }
 
+    const content = props.model.contents
+      .filter(section => props.path.active.indexOf(section.id) >= 0)[0];
+
     return (
       <div className='row'>
         <TableOfContents
@@ -33,7 +36,8 @@ export default class Content extends Component {
           drive={this.props.drive}
           path={this.props.path} />
         <ContentView
-          content={props.model.contents}
+          content={content}
+          subsections={content.subsections}
           editing={props.model.editing}
           actions={props.actions}
           drive={this.props.drive}

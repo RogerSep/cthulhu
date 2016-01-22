@@ -7,10 +7,12 @@ import styles from './_content.scss';
 
 export default class ContentView extends Component {
   static propTypes = {
-    content: PropTypes.array,
+    content: PropTypes.object,
+    subsections: PropTypes.array,
     editing: PropTypes.array,
     actions: PropTypes.object.isRequired,
-    drive: PropTypes.object
+    drive: PropTypes.object,
+    path: PropTypes.object
   };
 
   constructor(props) {
@@ -23,7 +25,9 @@ export default class ContentView extends Component {
     return (
       <div className="col-sm-8 col-md-9">
         <div styleName="sections">
-          {this.props.content.map(section => this.renderSection(section, this.props, this.markdownProcessor))}
+          {this.renderSection(this.props.content, this.props, this.markdownProcessor)}
+          {this.props.subsections.map(section => this.renderSection(section, this.props, this.markdownProcessor))}
+          <button onClick={() => this.props.drive.addSection(this.props.content.id)}>Add text section</button>
         </div>
       </div>
     );

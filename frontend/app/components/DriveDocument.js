@@ -67,7 +67,7 @@ class DriveDocument extends Component {
   drive = {
     bindString: (objectId, textarea) => {
       const collaborativeString = this.driveDocument.getModel().getRoot().get('sections').asArray().reduce((found, section) => {
-        if (section.get('content').getId() === objectId) {
+        if (section.getId() === objectId) {
           return section.get('content');
         }
 
