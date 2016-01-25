@@ -27,7 +27,7 @@ export default class Content extends Component {
     }
 
     const content = props.model.contents
-      .filter(section => props.path.active.indexOf(section.id) >= 0)[0];
+      .filter(section => props.path.active.indexOf(section.id) >= 0)[0] || props.model.contents[0];
 
     return (
       <div className='row'>
