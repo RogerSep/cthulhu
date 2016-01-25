@@ -1,5 +1,11 @@
 # Cthulhu - Projects Documentation Tool
 
+A collaborative realtime application to document projects. It will come with features like:
+
+- google-docs like realtime editing
+- versioning system so you know what changed exactly
+- deep linking to specific parts of the document (and throughout the history of the document), so it's easy to share and talk about what you're building
+
 ## Configuration
 
 ### Front-end
@@ -44,6 +50,7 @@ This will fire the server in the port `9000` and the webpack-dev-server in the p
 - [ ] Webpack for production
 - [ ] Organize folder structure
 - [ ] Automated tests
+- [ ] Decide a real name for the project :P
 
 ## License
 
