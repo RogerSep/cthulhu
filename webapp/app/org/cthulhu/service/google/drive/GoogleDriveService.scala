@@ -17,6 +17,7 @@ trait GoogleDriveService {
     object Permission {
       val User = "user"
       val Writer = "writer"
+      val Reader = "reader"
     }
   }
 

@@ -3,19 +3,20 @@
 # ~~~~
 
 # Home page
-GET     /                               controllers.ApplicationController.index
-GET     /signIn                         controllers.ApplicationController.signIn
-GET     /signOut                        controllers.ApplicationController.signOut
-GET     /authenticate/:provider         controllers.SocialAuthController.authenticate(provider)
-GET     /drive/projects/create/:project controllers.GoogleApiController.createProject(project)
-GET     /drive/projects/delete/:project controllers.GoogleApiController.deleteProject(project)
-GET     /drive/projects/share/:project  controllers.GoogleApiController.shareProject(project, email: String)
-GET     /drive/projects                 controllers.GoogleApiController.list(projectId: Option[String])
-GET     /javascriptRoutes               controllers.ApplicationController.javascriptRoutes
+GET     /                                       controllers.ApplicationController.index
+GET     /signIn                                 controllers.ApplicationController.signIn
+GET     /signOut                                controllers.ApplicationController.signOut
+GET     /authenticate/:provider                 controllers.SocialAuthController.authenticate(provider)
+GET     /drive/projects/create/:project         controllers.GoogleApiController.createProject(project)
+GET     /drive/projects/delete/:project         controllers.GoogleApiController.deleteProject(project)
+GET     /drive/projects/share/:project          controllers.GoogleApiController.shareProject(project, email: String)
+POST    /drive/projects/assets/upload/:project  controllers.GoogleApiController.upload(project)
+GET     /drive/projects                         controllers.GoogleApiController.list(projectId: Option[String])
+GET     /javascriptRoutes                       controllers.ApplicationController.javascriptRoutes
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file                   controllers.Assets.at(path="/public", file)
-GET     /webjars/*file                  controllers.WebJarAssets.at(file)
+GET     /assets/*file                           controllers.Assets.at(path="/public", file)
+GET     /webjars/*file                          controllers.WebJarAssets.at(file)
 
 # Because this is a simple page app. indexPath is the same as index, the path variable is there only to make a match.
-GET     /*path                          controllers.ApplicationController.indexPath(path)
+GET     /*path                                  controllers.ApplicationController.indexPath(path)
