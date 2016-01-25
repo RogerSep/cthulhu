@@ -32,6 +32,14 @@ function documentBindings(documentId) {
 
           const sections = model.createList();
           root.set('sections', sections);
+
+          const section = model.createMap();
+          section.set('type', 'text');
+          section.set('order', 0);
+          section.set('parent', '');
+          section.set('content', model.createString());
+
+          sections.push(section);
         },
         error => {
           subscriber.onError(error);
