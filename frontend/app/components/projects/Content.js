@@ -40,8 +40,9 @@ export default class Content extends Component {
           subsections={content.subsections}
           editing={props.model.editing}
           actions={props.actions}
-          drive={this.props.drive}
-          path={this.props.path} />
+          drive={props.drive}
+          path={props.path}
+          modalActive={props.model.modalActive} />
       </div>
     );
   }

@@ -89,6 +89,32 @@ class DriveDocument extends Component {
       section.set('content', model.createString());
 
       root.get('sections').push(section);
+    },
+    addImageSection: (file, parentId) => {
+      fetch(`/drive/projects/assets/upload/${this.props.params.projectId}`, {
+        credentials: 'same-origin',
+        method: 'post',
+        body: (function() {
+          const data = new FormData();
+          data.append('file', file, file.name);
+
+          return data;
+        }())
+      })
+      .then(resp => resp.json())
+      .then(data => {
+        const model = this.driveDocument.getModel();
+        const root = model.getRoot();
+
+        const section = model.createMap();
+        section.set('type', 'annotatedImage');
+        section.set('order', root.get('sections').length);
+        section.set('parent', parentId);
+        section.set('image', data);
+        section.set('annotations', model.createList());
+
+        root.get('sections').push(section);
+      });
     }
   };
 }

@@ -17,13 +17,27 @@ export default function convert(driveModel) {
         id: section.id,
         content: section.value.content.value,
         order: section.value.order.json,
+        type: section.value.type.json,
         subsections: driveModel.value.sections.value
           .filter(subsection => subsection.value.parent.json === section.id)
-          .map(subsection => ({
-            id: subsection.id,
-            content: subsection.value.content.value,
-            order: subsection.value.order.json
-          }))
+          .map(subsection => {
+            if (subsection.value.type.json === 'text') {
+              return {
+                id: subsection.id,
+                content: subsection.value.content.value,
+                order: subsection.value.order.json,
+                type: 'text'
+              };
+            } else {
+              return {
+                id: subsection.id,
+                type: 'annotatedImage',
+                order: subsection.value.order.json,
+                image: subsection.value.image.json,
+                annotations: []
+              };
+            }
+          })
           .sort((a, b) => a.order - b.order)
       };
     }).sort((a, b) => a.order - b.order);

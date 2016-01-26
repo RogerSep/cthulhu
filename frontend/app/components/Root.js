@@ -10,7 +10,8 @@ import {
   updateModel,
   error,
   editCollaborativeObject,
-  finishEditCollaborativeObject
+  finishEditCollaborativeObject,
+  activateModal
 } from '../redux/actions/action-creators';
 
 import commonStyles from '../styles/_base.scss';
@@ -46,7 +47,8 @@ export default connect(
       updateModel,
       error,
       editCollaborativeObject,
-      finishEditCollaborativeObject
+      finishEditCollaborativeObject,
+      activateModal
     }, dispatch);
 
     return {

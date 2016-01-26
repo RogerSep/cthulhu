@@ -42,3 +42,6 @@ export const editCollaborativeObject = objectId => ({ type: EDIT_COLLABORATIVE_O
 
 export const FINISH_EDIT_COLLABORATIVE_OBJECT = 'FINISH_EDIT_COLLABORATIVE_OBJECT';
 export const finishEditCollaborativeObject = objectId => ({ type: FINISH_EDIT_COLLABORATIVE_OBJECT, objectId });
+
+export const ACTIVATE_MODAL = 'ACTIVATE_MODAL';
+export const activateModal = (active = true) => ({ type: ACTIVATE_MODAL, active: active });

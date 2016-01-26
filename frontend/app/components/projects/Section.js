@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './_markdown.scss';
+import AnnotatedImageSection from './AnnotatedImageSection';
+import TextSection from './TextSection';
 
 export default class Section extends Component {
 
@@ -13,30 +15,10 @@ export default class Section extends Component {
   };
 
   render() {
-    let sectionRender;
-    if (!this.props.editing) {
-      sectionRender = (
-        <div>
-          {this.props.markdownProcessor.process(this.props.content.content || '*Click to add content*')}
-        </div>
-      );
-    } else {
-      let binding;
-      sectionRender = (
-        <textarea styleName='edit-box'
-          autoFocus={true}
-          defaultValue={this.props.content.content}
-          onBlur={() => {
-            this.props.actions.finishEditCollaborativeObject(this.props.content.id);
-            if (binding) {
-              binding.unbind();
-            }
-          }}
-          ref={ref => {
-            binding = this.props.drive.bindString(this.props.content.id, ref);
-          }} />
-      );
-    }
+    const sectionRender = (this.props.content.type === 'text' ?
+      <TextSection { ...this.props } /> :
+      <AnnotatedImageSection { ...this.props } />
+    );
 
     return (
       <div styleName='document-section'>
@@ -48,13 +30,6 @@ export default class Section extends Component {
         {sectionRender}
       </div>
     );
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const editFlagToggled = (this.props.editing || nextProps.editing) && !(this.props.editing && nextProps.editing);
-    const contentChangedWhileVisualizing = !this.props.editing && this.props.content.content !== nextProps.content.content;
-
-    return editFlagToggled || contentChangedWhileVisualizing;
   }
 
 }

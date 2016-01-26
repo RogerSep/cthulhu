@@ -8,7 +8,8 @@ import {
   ERROR,
   UPDATE_MODEL,
   EDIT_COLLABORATIVE_OBJECT,
-  FINISH_EDIT_COLLABORATIVE_OBJECT
+  FINISH_EDIT_COLLABORATIVE_OBJECT,
+  ACTIVATE_MODAL
 } from '../actions/action-creators';
 import modelConversions from '../../drive/modelConversions';
 
@@ -69,6 +70,15 @@ export default (state = initialState, action) => {
       model: {
         ...state.model,
         editing: state.model.editing.filter(id => id !== action.objectId)
+      }
+    };
+
+  case ACTIVATE_MODAL:
+    return {
+      ...state,
+      model: {
+        ...state.model,
+        modalActive: action.active
       }
     };
 
