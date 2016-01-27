@@ -37,8 +37,8 @@ export default function convert(driveModel) {
                 annotations: subsection.value.annotations.value.map(annotation => ({
                   id: annotation.id,
                   description: {
-                    id: annotation.value.description.id,
-                    value: annotation.value.description.value
+                    id: annotation.value.content.id,
+                    value: annotation.value.content.value
                   },
                   order: annotation.value.order.json,
                   position: annotation.value.position.json

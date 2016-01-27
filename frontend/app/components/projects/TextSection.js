@@ -13,35 +13,40 @@ export default class TextSection extends Component {
     super(props);
   }
 
+  renderTextarea() {
+    let binding;
+    return (
+      <textarea styleName='edit-box'
+        autoFocus={true}
+        defaultValue={this.props.content.content}
+        onBlur={() => {
+          this.props.actions.finishEditCollaborativeObject(this.props.content.id);
+          if (binding) {
+            binding.unbind();
+          }
+        }}
+        ref={ref => {
+          binding = this.props.drive.bindString(this.props.content.id, ref);
+        }} />
+    );
+  }
+
+  renderMarkdown() {
+    return (
+      <div>
+        {this.props.markdownProcessor.process(this.props.content.content || '*Click to add content*')}
+      </div>
+    );
+  }
+
   render() {
     const underEdition = this.props.editing.some(id => id === this.props.content.id);
 
-    let sectionRender;
-    if (!underEdition) {
-      sectionRender = (
-        <div>
-          {this.props.markdownProcessor.process(this.props.content.content || '*Click to add content*')}
-        </div>
-      );
+    if (underEdition) {
+      return this.renderTextarea();
     } else {
-      let binding;
-      sectionRender = (
-        <textarea styleName='edit-box'
-          autoFocus={true}
-          defaultValue={this.props.content.content}
-          onBlur={() => {
-            this.props.actions.finishEditCollaborativeObject(this.props.content.id);
-            if (binding) {
-              binding.unbind();
-            }
-          }}
-          ref={ref => {
-            binding = this.props.drive.bindString(this.props.content.id, ref);
-          }} />
-      );
+      return this.renderMarkdown();
     }
-
-    return sectionRender;
   }
 
   shouldComponentUpdate(nextProps) {

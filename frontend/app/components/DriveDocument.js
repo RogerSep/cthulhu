@@ -67,8 +67,20 @@ class DriveDocument extends Component {
   drive = {
     bindString: (objectId, textarea) => {
       const collaborativeString = this.driveDocument.getModel().getRoot().get('sections').asArray().reduce((found, section) => {
-        if (section.getId() === objectId) {
+        const type = section.get('type');
+
+        if (found) {
+          return found;
+        } else if (type === 'text' && section.getId() === objectId) {
           return section.get('content');
+        } else if (type === 'annotatedImage') {
+          return section.get('annotations').asArray().reduce((found, annotation) => {
+            if (annotation.get('content').getId() === objectId) {
+              return annotation.get('content');
+            }
+
+            return found;
+          }, null);
         }
 
         return found;
@@ -124,15 +136,15 @@ class DriveDocument extends Component {
         .filter(section => section.getId() === sectionId)
         .forEach(section => {
           const annotation = model.createMap();
-          const descr = model.createString();
-          descr.setText(description);
+          const content = model.createString();
+          content.setText(description);
 
           annotation.set('position', Object.assign({}, {
             left: '0',
             top: '0',
             angle: '0'
           }, marker));
-          annotation.set('description', descr);
+          annotation.set('content', content);
           annotation.set('order', section.get('annotations').length);
           section.get('annotations').push(annotation);
         });

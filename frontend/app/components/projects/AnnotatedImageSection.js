@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Marker from '../presentational/util/Marker';
+import Section from './Section';
 
 export default class AnnotatedImageSection extends Component {
   static propTypes = {
@@ -57,7 +58,16 @@ export default class AnnotatedImageSection extends Component {
   renderAnnotation = annotation => {
     return (
       <li key={annotation.id}>
-        {this.props.markdownProcessor.process(annotation.description.value)}
+        <Section
+          content={({
+            id: annotation.description.id,
+            content: annotation.description.value,
+            type: 'text'
+          })}
+          actions={this.props.actions}
+          drive={this.props.drive}
+          editing={this.props.editing}
+          markdownProcessor={this.props.markdownProcessor} />
       </li>
     );
   };
