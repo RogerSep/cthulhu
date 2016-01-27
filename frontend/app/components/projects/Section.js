@@ -11,7 +11,8 @@ export default class Section extends Component {
     actions: PropTypes.object,
     drive: PropTypes.object,
     editing: PropTypes.bool,
-    markdownProcessor: PropTypes.object
+    markdownProcessor: PropTypes.object,
+    marker: PropTypes.object
   };
 
   render() {

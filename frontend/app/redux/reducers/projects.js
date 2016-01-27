@@ -9,7 +9,8 @@ import {
   UPDATE_MODEL,
   EDIT_COLLABORATIVE_OBJECT,
   FINISH_EDIT_COLLABORATIVE_OBJECT,
-  ACTIVATE_MODAL
+  ACTIVATE_MODAL,
+  PLACE_MARKER
 } from '../actions/action-creators';
 import modelConversions from '../../drive/modelConversions';
 
@@ -79,6 +80,15 @@ export default (state = initialState, action) => {
       model: {
         ...state.model,
         modalActive: action.active
+      }
+    };
+
+  case PLACE_MARKER:
+    return {
+      ...state,
+      model: {
+        ...state.model,
+        marker: action.marker
       }
     };
 

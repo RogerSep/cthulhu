@@ -11,7 +11,8 @@ import {
   error,
   editCollaborativeObject,
   finishEditCollaborativeObject,
-  activateModal
+  activateModal,
+  placeMarker
 } from '../redux/actions/action-creators';
 
 import commonStyles from '../styles/_base.scss';
@@ -48,7 +49,8 @@ export default connect(
       error,
       editCollaborativeObject,
       finishEditCollaborativeObject,
-      activateModal
+      activateModal,
+      placeMarker
     }, dispatch);
 
     return {

@@ -115,6 +115,27 @@ class DriveDocument extends Component {
 
         root.get('sections').push(section);
       });
+    },
+    addAnnotation: (marker, description, sectionId) => {
+      const model = this.driveDocument.getModel();
+      const root = model.getRoot();
+
+      root.get('sections').asArray()
+        .filter(section => section.getId() === sectionId)
+        .forEach(section => {
+          const annotation = model.createMap();
+          const descr = model.createString();
+          descr.setText(description);
+
+          annotation.set('position', Object.assign({}, {
+            left: '0',
+            top: '0',
+            angle: '0'
+          }, marker));
+          annotation.set('description', descr);
+          annotation.set('order', section.get('annotations').length);
+          section.get('annotations').push(annotation);
+        });
     }
   };
 }

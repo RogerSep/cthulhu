@@ -15,7 +15,8 @@ export default class ContentView extends Component {
     actions: PropTypes.object.isRequired,
     drive: PropTypes.object,
     path: PropTypes.object,
-    modalActive: PropTypes.bool
+    modalActive: PropTypes.bool,
+    marker: PropTypes.object
   };
 
   constructor(props) {
@@ -56,7 +57,8 @@ export default class ContentView extends Component {
         actions={props.actions}
         drive={props.drive}
         editing={props.editing.some(id => id === section.id)}
-        markdownProcessor={markdownProcessor} />
+        markdownProcessor={markdownProcessor}
+        marker={props.marker} />
     );
   };
 

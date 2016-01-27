@@ -125,7 +125,7 @@ class GoogleApiController @Inject() (
           .setParents(Collections.singletonList(projectFolder.getId))
 
         val fileContent = new FileContent(imageFile.contentType.getOrElse("octet/stream"), imageFile.ref.file)
-        val file = service.files.create(fileMetadata, fileContent).setFields("*").execute()
+        val file = service.files.create(fileMetadata, fileContent).setFields("id, imageMediaMetadata, name, webContentLink").execute()
 
         Ok(Json.parse(file.toString))
       }

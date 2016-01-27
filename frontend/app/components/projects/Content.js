@@ -42,7 +42,8 @@ export default class Content extends Component {
           actions={props.actions}
           drive={props.drive}
           path={props.path}
-          modalActive={props.model.modalActive} />
+          modalActive={props.model.modalActive}
+          marker={props.model.marker}/>
       </div>
     );
   }

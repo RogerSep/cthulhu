@@ -50,6 +50,9 @@ This will fire the server in the port `9000` and the webpack-dev-server in the p
 - [ ] Webpack for production
 - [ ] Organize folder structure
 - [ ] Automated tests
+- [ ] Search
+- [ ] Versioning system
+- [ ] Comments system
 - [ ] Decide a real name for the project :P
 
 ## License

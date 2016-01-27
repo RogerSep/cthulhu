@@ -45,3 +45,6 @@ export const finishEditCollaborativeObject = objectId => ({ type: FINISH_EDIT_CO
 
 export const ACTIVATE_MODAL = 'ACTIVATE_MODAL';
 export const activateModal = (active = true) => ({ type: ACTIVATE_MODAL, active: active });
+
+export const PLACE_MARKER = 'PLACE_MARKER';
+export const placeMarker = marker => ({ type: PLACE_MARKER, marker });

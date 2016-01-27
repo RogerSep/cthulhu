@@ -34,7 +34,15 @@ export default function convert(driveModel) {
                 type: 'annotatedImage',
                 order: subsection.value.order.json,
                 image: subsection.value.image.json,
-                annotations: []
+                annotations: subsection.value.annotations.value.map(annotation => ({
+                  id: annotation.id,
+                  description: {
+                    id: annotation.value.description.id,
+                    value: annotation.value.description.value
+                  },
+                  order: annotation.value.order.json,
+                  position: annotation.value.position.json
+                }))
               };
             }
           })
