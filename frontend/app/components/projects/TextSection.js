@@ -5,7 +5,7 @@ export default class TextSection extends Component {
     content: PropTypes.object,
     actions: PropTypes.object,
     drive: PropTypes.object,
-    editing: PropTypes.bool,
+    editing: PropTypes.array,
     markdownProcessor: PropTypes.object
   };
 
@@ -14,8 +14,10 @@ export default class TextSection extends Component {
   }
 
   render() {
+    const underEdition = this.props.editing.some(id => id === this.props.content.id);
+
     let sectionRender;
-    if (!this.props.editing) {
+    if (!underEdition) {
       sectionRender = (
         <div>
           {this.props.markdownProcessor.process(this.props.content.content || '*Click to add content*')}
@@ -43,8 +45,11 @@ export default class TextSection extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const editFlagToggled = (this.props.editing || nextProps.editing) && !(this.props.editing && nextProps.editing);
-    const contentChangedWhileVisualizing = !this.props.editing && this.props.content.content !== nextProps.content.content;
+    const underEdition = this.props.editing.some(id => id === this.props.content.id);
+    const willBeUnderEdition = nextProps.editing.some(id => id === nextProps.content.id);
+
+    const editFlagToggled = (underEdition || willBeUnderEdition) && !(underEdition && willBeUnderEdition);
+    const contentChangedWhileVisualizing = !underEdition && this.props.content.content !== nextProps.content.content;
 
     return editFlagToggled || contentChangedWhileVisualizing;
   }

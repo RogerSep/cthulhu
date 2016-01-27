@@ -37,7 +37,7 @@ cd webapp
 activator run
 ```
 
-This will fire the server in the port `9000` and the webpack-dev-server in the port `3000`. Make sure these ports are free. Go to `http://localhost:9000`
+This will fire the server in the port `9000` and the webpack-dev-server in the port `3000`. Make sure these ports are free. Go to [`http://localhost:9000`](http://localhost:9000)
 
 ## Known issues
 

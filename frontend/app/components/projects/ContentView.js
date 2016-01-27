@@ -56,7 +56,7 @@ export default class ContentView extends Component {
         content={section}
         actions={props.actions}
         drive={props.drive}
-        editing={props.editing.some(id => id === section.id)}
+        editing={props.editing}
         markdownProcessor={markdownProcessor}
         marker={props.marker} />
     );

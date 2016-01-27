@@ -10,8 +10,8 @@ export default class Section extends Component {
     content: PropTypes.object,
     actions: PropTypes.object,
     drive: PropTypes.object,
-    editing: PropTypes.bool,
-    markdownProcessor: PropTypes.object,
+    editing: PropTypes.array,
+    markdownProcessor: PropTypes.object.isRequired,
     marker: PropTypes.object
   };
 
@@ -25,13 +25,21 @@ export default class Section extends Component {
       <div styleName='document-section'>
         <div styleName="control-panel">
           <i className="fa fa-pencil"
-            onClick={() => this.props.actions.editCollaborativeObject(this.props.content.id)}></i>
+            onClick={this.toggleEdition}></i>
           <i className="fa fa-trash"></i>
         </div>
         {sectionRender}
       </div>
     );
   }
+
+  toggleEdition = () => {
+    if (this.props.editing.some(sectionId => sectionId === this.props.content.id)) {
+      this.props.actions.finishEditCollaborativeObject(this.props.content.id);
+    } else {
+      this.props.actions.editCollaborativeObject(this.props.content.id);
+    }
+  };
 
 }
 

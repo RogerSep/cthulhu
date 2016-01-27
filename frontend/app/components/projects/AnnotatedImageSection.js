@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import Modal from 'react-modal';
+import Marker from '../presentational/util/Marker';
 
 export default class AnnotatedImageSection extends Component {
   static propTypes = {
     content: PropTypes.object,
     actions: PropTypes.object,
     drive: PropTypes.object,
-    editing: PropTypes.bool,
+    editing: PropTypes.array,
     markdownProcessor: PropTypes.object,
     marker: PropTypes.object
   };
@@ -17,61 +17,54 @@ export default class AnnotatedImageSection extends Component {
 
   render() {
     const image = this.props.content.image;
+    const underEdition = this.props.editing.some(sectionId => sectionId === this.props.content.id);
     let marker = (<span />);
 
-    if (this.props.marker) {
-      marker = this.renderMarker(this.props.marker);
+    if (this.props.marker && underEdition) {
+      marker = (<Marker marker={this.props.marker} />);
     }
 
     return (
       <div>
-        <img src={image.webContentLink} />
-        <Modal isOpen={this.props.editing}>
-          <button onClick={() => this.props.actions.finishEditCollaborativeObject(this.props.content.id)}></button>
-          <div>
-            <div style={({position: 'relative', display: 'inline-block'})}>
-              <img src={image.webContentLink}
-                onMouseDown={this.placeMarker} />
-              {marker}
-              {this.props.content.annotations.map(annotation => this.renderMarker({...annotation.position, id: annotation.id}))}
-            </div>
-            <textarea
+        <div>
+          <div style={({position: 'relative'})}
+            onMouseDown={e => {
+              if (underEdition) {
+                this.placeMarker(e);
+              }
+            }} >
+            <img src={image.webContentLink}
+              style={({maxWidth: '100%'})} />
+            {underEdition ? marker : ''}
+            {this.props.content.annotations.map(annotation =>
+              <Marker key={annotation.id}
+                marker={({...annotation.position, id: annotation.id})} />
+            )}
+          </div>
+          <div style={({display: underEdition ? 'block' : 'none'})}>
+            <textarea placeholder="Mark a point in the image and put its description here."
               onBlur={this.createMarker}
               ref="textarea" />
           </div>
-        </Modal>
+        </div>
+        <ul>
+          {this.props.content.annotations.map(annotation => this.renderAnnotation(annotation))}
+        </ul>
       </div>
     );
   }
 
-  renderMarker(marker) {
-    const style = {
-      fill:'rgb(0,0,255)',
-      'strokeWidth':3,
-      stroke:'rgb(0,0,0)'
-    };
-
-    const position = {
-      position: 'absolute',
-      left: `${marker.left}%`,
-      top: `${marker.top}%`
-    };
-
+  renderAnnotation = annotation => {
     return (
-      <svg key={marker.id || 'empty'}
-        width="5"
-        height="5"
-        style={position}>
-        <rect width="5"
-          height="5"
-          style={style} />
-      </svg>
+      <li key={annotation.id}>
+        {this.props.markdownProcessor.process(annotation.description.value)}
+      </li>
     );
-  }
+  };
 
   placeMarker = (e) => {
-    const x = e.pageX - e.target.offsetLeft - e.target.offsetParent.offsetLeft - e.target.offsetParent.offsetParent.offsetLeft;
-    const y = e.pageY - e.target.offsetTop - e.target.offsetParent.offsetTop - e.target.offsetParent.offsetParent.offsetTop;
+    const x = e.pageX - e.target.getBoundingClientRect().left;
+    const y = e.pageY - e.target.getBoundingClientRect().top - e.target.offsetParent.offsetParent.offsetParent.scrollTop;
 
     const width = e.target.width;
     const height = e.target.height;
@@ -83,18 +76,21 @@ export default class AnnotatedImageSection extends Component {
       left,
       top
     });
-
-    this.refs.textarea.focus();
   };
 
   createMarker = () => {
-    if ((this.refs.textarea.value || '').trim().length) {
+    if ((this.refs.textarea.value || '').trim().length
+      && this.props.marker
+      && this.props.marker.top
+      && this.props.marker.left
+    ) {
       this.props.drive.addAnnotation(
         this.props.marker,
         this.refs.textarea.value,
         this.props.content.id
       );
       this.refs.textarea.value = '';
+      this.props.actions.placeMarker(undefined);
     }
   };
 }
