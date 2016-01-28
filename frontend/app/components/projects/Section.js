@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './_markdown.scss';
-import AnnotatedImageSection from './AnnotatedImageSection';
+import ImageSection from './ImageSection';
 import TextSection from './TextSection';
 
 export default class Section extends Component {
@@ -18,7 +18,7 @@ export default class Section extends Component {
   render() {
     const sectionRender = (this.props.content.type === 'text' ?
       <TextSection { ...this.props } /> :
-      <AnnotatedImageSection { ...this.props } />
+      <ImageSection { ...this.props } />
     );
 
     return (

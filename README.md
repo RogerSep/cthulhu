@@ -46,13 +46,15 @@ This will fire the server in the port `9000` and the webpack-dev-server in the p
 
 ## TODO
 
-- [ ] Create a new component for annotated images with file upload
+- [x] Create a new component for annotated images with file upload
 - [ ] Webpack for production
 - [ ] Organize folder structure
 - [ ] Automated tests
 - [ ] Search
 - [ ] Versioning system
+- [ ] Health of a document
 - [ ] Comments system
+- [ ] Plugins system
 - [ ] Decide a real name for the project :P
 
 ## License

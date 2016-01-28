@@ -14,7 +14,8 @@ import {
   activateModal,
   placeMarker
 } from '../redux/actions/action-creators';
-
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import commonStyles from '../styles/_base.scss';
 
 class Root extends Component {
@@ -34,6 +35,8 @@ class Root extends Component {
     );
   }
 }
+
+const App = DragDropContext(HTML5Backend)(Root);
 
 export default connect(
   state => ({
@@ -59,4 +62,4 @@ export default connect(
       })
     };
   }
-)(Root);
+)(App);

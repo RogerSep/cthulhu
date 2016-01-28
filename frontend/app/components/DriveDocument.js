@@ -140,13 +140,36 @@ class DriveDocument extends Component {
           content.setText(description);
 
           annotation.set('position', Object.assign({}, {
-            left: '0',
-            top: '0',
-            angle: '0'
+            left: 0,
+            top: 0,
+            angle: 0
           }, marker));
           annotation.set('content', content);
           annotation.set('order', section.get('annotations').length);
           section.get('annotations').push(annotation);
+        });
+    },
+    updateMarker: marker => {
+      const model = this.driveDocument.getModel();
+      const root = model.getRoot();
+
+      root.get('sections').asArray()
+        .filter(section => section.get('type') === 'annotatedImage' &&
+          section.get('annotations').asArray().some(annotation => annotation.getId() === marker.id))
+        .forEach(section => {
+          const annotations = section.get('annotations').asArray();
+
+          annotations.forEach(annotation => {
+            if (annotation.getId() === marker.id) {
+              const position = annotation.get('position');
+              const { left, top } = marker;
+
+              annotation.set('position', Object.assign({}, position, {
+                left,
+                top
+              }));
+            }
+          });
         });
     }
   };

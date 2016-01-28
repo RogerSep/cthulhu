@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import Marker from '../presentational/util/Marker';
 import Section from './Section';
+import AnnotatedImage from '../presentational/util/AnnotatedImage';
 
-export default class AnnotatedImageSection extends Component {
+export default class ImageSection extends Component {
   static propTypes = {
     content: PropTypes.object,
     actions: PropTypes.object,
@@ -17,31 +18,19 @@ export default class AnnotatedImageSection extends Component {
   }
 
   render() {
-    const image = this.props.content.image;
     const underEdition = this.props.editing.some(sectionId => sectionId === this.props.content.id);
-    let marker = (<span />);
-
-    if (this.props.marker && underEdition) {
-      marker = (<Marker marker={this.props.marker} />);
-    }
 
     return (
       <div>
         <div>
-          <div style={({position: 'relative'})}
-            onMouseDown={e => {
-              if (underEdition) {
-                this.placeMarker(e);
-              }
-            }} >
-            <img src={image.webContentLink}
-              style={({maxWidth: '100%'})} />
-            {underEdition ? marker : ''}
-            {this.props.content.annotations.map(annotation =>
-              <Marker key={annotation.id}
-                marker={({...annotation.position, id: annotation.id})} />
-            )}
-          </div>
+          <AnnotatedImage
+            image={this.props.content.image}
+            actions={this.props.actions}
+            drive={this.props.drive}
+            annotations={this.props.content.annotations}
+            underEdition={underEdition}
+            marker={this.props.marker}
+            />
           <div style={({display: underEdition ? 'block' : 'none'})}>
             <textarea placeholder="Mark a point in the image and put its description here."
               onBlur={this.createMarker}
@@ -70,22 +59,6 @@ export default class AnnotatedImageSection extends Component {
           markdownProcessor={this.props.markdownProcessor} />
       </li>
     );
-  };
-
-  placeMarker = (e) => {
-    const x = e.pageX - e.target.getBoundingClientRect().left;
-    const y = e.pageY - e.target.getBoundingClientRect().top - e.target.offsetParent.offsetParent.offsetParent.scrollTop;
-
-    const width = e.target.width;
-    const height = e.target.height;
-
-    const left = (1 - (width - x) / width) * 100;
-    const top = (1 - (height - y) / height) * 100;
-
-    this.props.actions.placeMarker({
-      left,
-      top
-    });
   };
 
   createMarker = () => {
