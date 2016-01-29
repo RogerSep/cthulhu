@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unknown-property */
+
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import css from './CollaborativeItem.scss';
@@ -14,7 +16,8 @@ class CollaborativeItem extends Component {
 
   render() {
     return (
-      <Link className={css.link} to={this.props.link}>
+      <Link className={css.link}
+        to={this.props.link}>
         <div className={css.projectIconContainer}>
           <svg width="44px"
             height="56px"
