@@ -26,7 +26,7 @@ const createStoreWithMiddleware = applyMiddleware(
 
 const store = createStoreWithMiddleware(reducer);
 
-const app = document.createElement('div');
+const app = document.createElement('main');
 document.body.appendChild(app);
 
 driveInitialize();

@@ -29,9 +29,9 @@ class Root extends Component {
 
   render() {
     return (
-      <div>
+      <section>
         {this.props.children && React.cloneElement(this.props.children, { ...this.props })}
-      </div>
+      </section>
     );
   }
 }
