@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Marker from './Marker';
 import { DropTarget } from 'react-dnd';
-import { findDOMNode } from 'react-dom'
+import { findDOMNode } from 'react-dom';
 import Types from './DragAndDropTypes';
 
 
@@ -34,7 +34,7 @@ class AnnotatedImage extends Component {
           <Marker marker={this.props.marker} />}
         {this.props.annotations.map(annotation =>
           <Marker key={annotation.id}
-            marker={({...annotation.position, id: annotation.id})} />
+            marker={({...annotation.position, id: annotation.id, label: annotation.label})} />
         )}
       </div>
     );
@@ -70,8 +70,6 @@ export default DropTarget(Types.marker, {
 
     const left = (1 - (width - Math.abs(x)) / width) * 100 * (x / Math.abs(x)) + item.left;
     const top = (1 - (height - Math.abs(y)) / height) * 100 * (y / Math.abs(y)) + item.top;
-
-    console.log(left, top);
 
     props.drive.updateMarker({
       id: item.id,

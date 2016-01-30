@@ -47,6 +47,7 @@ export default class ImageSection extends Component {
   renderAnnotation = annotation => {
     return (
       <li key={annotation.id}>
+        {annotation.label}
         <Section
           content={({
             id: annotation.description.id,

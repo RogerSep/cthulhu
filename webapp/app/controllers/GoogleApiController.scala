@@ -63,9 +63,12 @@ class GoogleApiController @Inject() (
       val permission = new Permission()
         .setEmailAddress(request.identity.email.get)
         .setType(drive.Types.Permission.User)
-        .setRole(drive.Types.Permission.Writer)
+        .setRole(drive.Types.Permission.Reader)
 
       service.permissions().create(projectFolder.getId, permission).execute()
+
+      permission.setRole(drive.Types.Permission.Writer)
+      service.permissions().create(project.getId, permission).execute()
 
       project
     }
@@ -107,9 +110,12 @@ class GoogleApiController @Inject() (
       val permission = new Permission()
         .setEmailAddress(email)
         .setType(drive.Types.Permission.User)
-        .setRole(drive.Types.Permission.Writer)
+        .setRole(drive.Types.Permission.Reader)
 
       service.permissions().create(getProjectFolder(project).getId, permission).execute()
+
+      permission.setRole(drive.Types.Permission.Writer)
+      service.permissions().create(project, permission).execute()
     }
 
     Ok("shared")

@@ -22,6 +22,11 @@ export default class TableOfContents extends Component {
             return (
               <li key={section.id}>
                 <Link to={`${this.props.path.project}/${section.id}`}>{section.title}</Link>
+                <ul>
+                  {section.subsections.map(subsection => (
+                    <li key={subsection.id}><Link to={`${this.props.path.project}/${section.id}/${subsection.id}`}>{subsection.title}</Link></li>
+                  ))}
+                </ul>
               </li>
             );
           })}
