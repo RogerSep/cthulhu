@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Marker from '../presentational/util/Marker';
 import Section from './Section';
 import AnnotatedImage from '../presentational/util/AnnotatedImage';
+import styles from './_image-section.scss';
 
 export default class ImageSection extends Component {
   static propTypes = {
@@ -21,7 +22,7 @@ export default class ImageSection extends Component {
     const underEdition = this.props.editing.some(sectionId => sectionId === this.props.content.id);
 
     return (
-      <div>
+      <div className={styles.imageSection}>
         <div>
           <AnnotatedImage
             image={this.props.content.image}
@@ -46,8 +47,7 @@ export default class ImageSection extends Component {
 
   renderAnnotation = annotation => {
     return (
-      <li key={annotation.id}>
-        {annotation.label}
+      <li key={annotation.id} data-label={annotation.label}>
         <Section
           content={({
             id: annotation.description.id,

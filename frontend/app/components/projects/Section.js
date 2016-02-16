@@ -26,7 +26,8 @@ export default class Section extends Component {
         <div styleName="control-panel">
           <i className="fa fa-pencil"
             onClick={this.toggleEdition}></i>
-          <i className="fa fa-trash"></i>
+          <i className="fa fa-trash"
+            onClick={() => this.delete(this.props.content.id)}></i>
         </div>
         {sectionRender}
       </div>
@@ -41,6 +42,7 @@ export default class Section extends Component {
     }
   };
 
+  delete = objectId => this.props.drive.delete(objectId);
 }
 
 export default CSSModules(Section, styles);

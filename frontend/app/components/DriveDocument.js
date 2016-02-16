@@ -171,6 +171,16 @@ class DriveDocument extends Component {
             }
           });
         });
+    },
+    delete: objectId => {
+      const model = this.driveDocument.getModel();
+      const root = model.getRoot();
+
+      const sections = root.get('sections');
+
+      sections.asArray()
+        .filter(section => section.getId() === objectId)
+        .forEach(section => console.log(section));
     }
   };
 }
